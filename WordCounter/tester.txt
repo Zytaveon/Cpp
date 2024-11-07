@@ -1,0 +1,9 @@
+Hello there little dewey. How are you doing today? This is just some practice
+text to use for the wordSorter thingy. Hopefully there is a few words that overlap
+so that it can actually be counted. WHo knows.
+Will probably also need to deal with the strings and pull them all to lowercase
+or uppdercase. It really doesnt matter. Also will need to get some of the punctuation dealt with because harsh and harsh. wont be
+the same word since one has a period. We will figure it out hopefully.
+just need to motivation to do something. And going to have to get the console fixed or terminal whatever word you want to use. I literally
+cant use shift and j at the same time because it will open the terminal at any second no matter what mode i am in. So need to change the bind
+to control and j or change so it only opens it in normal mode. Will have to figure it out.
