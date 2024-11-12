@@ -30,7 +30,7 @@ namespace DEW{
     class Card{
         public:
             Card();
-            Card(int suit, int rank);
+            Card(int rank, int suit);
             int getSuit();
             int getRank();
             std::string getCardString();

@@ -13,9 +13,17 @@ namespace DEW{
         public:
             Deck(int numOfDecks);
             void setDeck();
+            void shuffle();
+
+            //Test Function
+            void printDeck();
 
         private:
-            std::vector<DEW::Card> createDeck();
+            std::vector<DEW::Card> deck;
+
+            void cutShuffle();
+            void washShuffle();
+            void riffleshuffle();           
 
 
     };

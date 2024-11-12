@@ -38,12 +38,16 @@ int DEW::Card::getRank(){
 
 std::string DEW::Card::getCardString(){
     std::string cardString = "";
-        if(rank <= 10 && rank > 0){
+        if(rank <= 9 && rank > 0){
             cardString += std::to_string(rank);
         }
         
         else{
             switch(rank){
+                case 10:
+                    cardString += "T";
+                    break;
+
                 case 11:
                     cardString += "J";
                     break;
