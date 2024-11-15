@@ -25,6 +25,7 @@ DEW::Card::Card(int newRank, int newSuit){
 
     suit = newSuit;
     rank = newRank;
+    std::string stringy = getCardString();
 
 }
 
@@ -93,5 +94,14 @@ std::string DEW::Card::getCardString(){
                 cardString += "CaseSwitchSuitError";
         }
 
+    stringy = cardString;
     return cardString;
+}
+
+bool DEW::Card::isEqualRank(DEW::Card otherCard){
+    if(rank == otherCard.getRank()){
+        return true;
+    }
+    
+    return false;
 }

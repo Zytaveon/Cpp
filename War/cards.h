@@ -34,9 +34,11 @@ namespace DEW{
             int getSuit();
             int getRank();
             std::string getCardString();
+            bool isEqualRank(DEW::Card otherCard);
 
         private:
             int suit;
             int rank;
+            std::string stringy;
     };
 }

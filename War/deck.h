@@ -14,6 +14,10 @@ namespace DEW{
             Deck(int numOfDecks);
             void setDeck();
             void shuffle();
+            DEW::Card getRandomCard();
+            DEW::Card getNextCard();
+            void addCard(DEW::Card newCard);
+
 
             //Test Function
             void printDeck();

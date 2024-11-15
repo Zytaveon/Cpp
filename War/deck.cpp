@@ -43,12 +43,13 @@ void DEW::Deck::riffleshuffle(){
 
     for(int i = 0; i < deckSize; ++i){
         newDeck.push_back(deck.at(std::rand() % deck.size()));
+        
     }
 
 }
 
 void DEW::Deck::cutShuffle(){
-    return;
+      return;
 }
 
 void DEW::Deck::printDeck(){
@@ -56,3 +57,21 @@ void DEW::Deck::printDeck(){
         std::cout << deck.at(i).getCardString() << " i:" << i << std::endl;
     }
 }
+
+DEW::Card DEW::Deck::getRandomCard(){
+    srand(time(0));
+    return deck.at(std::rand() % deck.size());
+}
+
+DEW::Card DEW::Deck::getNextCard(){
+    DEW::Card newCard = deck.at(deck.size() - 1);
+    deck.pop_back();
+
+    return newCard;
+}
+
+void DEW::Deck::addCard(DEW::Card newCard){
+    deck.push_back(newCard);
+    return;
+}
+
