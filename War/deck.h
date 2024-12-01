@@ -1,12 +1,26 @@
 #include <iostream>
 #include <vector>
-#include "cards.h"
 
 /*
     Deck class which creates a deck of (cards) object
 */
 
 namespace DEW{
+
+    class Card{
+        public:
+            Card();
+            Card(int rank, int suit);
+            int getSuit();
+            int getRank();
+            std::string getCardString();
+            bool isEqualRank(DEW::Card otherCard);
+
+        private:
+            int suit;
+            int rank;
+            std::string stringy;
+    };
 
     class Deck{
 

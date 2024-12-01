@@ -22,6 +22,8 @@ int main(){
         playerTwoActive.addCard(deck.getNextCard());
     }
 
+    std::cout << "Hi!" << std::endl;   
+
     
 
     
