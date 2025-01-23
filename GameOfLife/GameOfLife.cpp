@@ -7,22 +7,10 @@ public:
     int rows;
     int cols;
 
-    std::vector<std::vector<int>> grid = {{}};
-
     Grid(const int rows, const int cols){
         this->rows = rows; this->cols = cols;
 
-        std::vector<std::vector<int>> newGrid = {{}};
-        std::vector<int> currentLine = {};
-
-        for(int i = 0; i < this->rows; ++i){
-            currentLine = {};
-            for(int j = 0; j < this->cols; ++j){
-                currentLine.push_back((i * 10) + j);
-            }
-
-            newGrid.push_back(currentLine);
-        }
+        int grid[][cols] = {0};
 
         return;
     }
@@ -36,6 +24,9 @@ int main(void){
 
     int windowWidth = 500;
     int windowHeight = 500; 
+
+    const int ROWS = 5;
+    const int COLS = 5;
 
     InitWindow(windowWidth, windowHeight, "Conway's Game of Life");
     SetTargetFPS(60);
