@@ -94,7 +94,41 @@ public:
     }
 
     int getNeighbors(int i, int j){
-        return 0;
+        int neighbors = 0;
+
+        if(i > 0 && j > 0){
+            if(grid.at(i - 1).at(j - 1) == 1){neighbors++;}
+        }
+
+        if(i > 0){
+            if(grid.at(i - 1).at(j) == 1){neighbors++;}
+        }
+
+        if(i > 0 && j < gridCols - 1){
+            if(grid.at(i - 1).at(j + 1) == 1){neighbors++;}
+        }
+
+        if(j > 0){
+            if(grid.at(i).at(j - 1) == 1){neighbors++;}
+        }
+
+        if(j < gridCols - 1){
+            if(grid.at(i).at(j + 1) == 1){neighbors++;}
+        }
+
+        if(i < gridRows - 1 && j > 0){
+            if(grid.at(i + 1).at(j - 1) == 1){neighbors++;}
+        }
+
+        if(i < gridRows - 1){
+            if(grid.at(i + 1).at(j) == 1){neighbors++;}
+        }
+
+        if(i < gridRows - 1 && j < gridCols - 1){
+            if(grid.at(i + 1).at(j + 1) == 1){neighbors++;}
+        }
+
+        return neighbors;
     }
 };
 
@@ -103,12 +137,22 @@ int main(void){
     int ROWS = 5;
     int COLS = 5;
     
-    std::vector<std::vector<int>> userGrid = {{1, 0 , 0 , 0 , 0}, {0, 1, 0, 0, 0}, {0, 0, 1, 0, 0}, {9, 0, 0, 1, 0}, {0, 0, 0, 0, 1}};
+    std::vector<std::vector<int>> userGrid = {
+        {0, 0, 0, 0, 0},
+        {0, 0, 1, 0, 0}, 
+        {0, 1, 0, 1, 0}, 
+        {0, 1, 0, 1, 0}, 
+        {0, 0, 1, 0, 0}
+        };
 
     //Grid grid = Grid(ROWS, COLS);
     Grid grid = Grid(userGrid);
+    std::cout << "Original: " << std::endl;
+    grid.printGrid();
     grid.getNextGrid();
-    
+
+    std::cout << std::endl;
+    std::cout << "After: " << std::endl;
 
     grid.printGrid();
 
