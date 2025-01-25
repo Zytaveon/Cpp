@@ -130,12 +130,38 @@ public:
 
         return neighbors;
     }
+
+    void drawGrid(int gridWidth, int gridHeight){
+        ClearBackground(RED);
+
+        int columnSize = gridWidth / gridCols;
+        int RowSize = gridHeight / gridRows;
+
+        Color SquareColor;
+
+        for(int i = 0; i < gridRows; ++i){
+            for(int j = 0; j < gridCols; ++j){
+                if(grid.at(i).at(j) == 1){
+                    SquareColor = WHITE;
+                }
+                else{
+                    SquareColor = BLACK;
+                }
+                DrawRectangle(j * columnSize, i * RowSize, columnSize - 1, RowSize - 1, SquareColor);
+            }
+        }
+
+        
+    }
 };
 
 int main(void){
 
-    int ROWS = 5;
-    int COLS = 5;
+    int ROWS = 50;
+    int COLS = 50;
+
+    int gridWidth = 1250;
+    int gridHeight = 1000;
     
     std::vector<std::vector<int>> userGrid = {
         {0, 0, 0, 0, 0},
@@ -145,16 +171,27 @@ int main(void){
         {0, 0, 1, 0, 0}
         };
 
-    //Grid grid = Grid(ROWS, COLS);
-    Grid grid = Grid(userGrid);
-    std::cout << "Original: " << std::endl;
-    grid.printGrid();
-    grid.getNextGrid();
+    Grid grid = Grid(ROWS, COLS);
+    //Grid grid = Grid(userGrid);
 
-    std::cout << std::endl;
-    std::cout << "After: " << std::endl;
+    InitWindow(gridWidth, gridHeight, "Conway's Game of Life");
+    SetTargetFPS(60);
 
-    grid.printGrid();
+
+    while(!WindowShouldClose()){
+        BeginDrawing();
+
+        grid.drawGrid(gridWidth, gridHeight);
+
+
+        EndDrawing();
+
+        if(IsKeyPressed(KEY_SPACE)){
+            grid.getNextGrid();
+        }
+    }
+
+    CloseWindow();
 
 
 
