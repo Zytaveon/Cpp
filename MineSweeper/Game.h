@@ -24,6 +24,17 @@ class Game{
 
         int gridRows;
         int gridCols;
+        int totalGridSquares;
+
+        //To start, mines will be 10% of totalGridSquares, but always aleast one.
+        void addMines();
+
+        //For every square, count how many mines it has for its "neighbors"
+        //and change the value to reflect that.
+        void addNeighbors();
+
+        //Helper function for addNeighbors
+        int getNeighbors(int currentRow, int currentCol);
 
 
 };
