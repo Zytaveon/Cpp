@@ -86,7 +86,6 @@ void Game::addNeighbors(){
     }
 }
 
-
 int  Game::getNeighbors(int currentRow, int currentCol){
 
     int neighbors = 0;
@@ -124,4 +123,85 @@ int  Game::getNeighbors(int currentRow, int currentCol){
     }
 
     return neighbors;
+}
+
+void Game::drawGame(int gridWidth, int gridHeight){
+
+    int boxWidth = gridWidth/ gridCols;
+    int boxHeight = gridHeight / gridRows;
+
+    Color boxColor = PURPLE;
+
+    for(int i = 0; i < gridRows; ++i){
+        for(int j = 0; j < gridCols; ++j){
+
+            boxColor = getColor(i, j);
+
+            DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, boxColor);
+        }
+    }
+    
+    return;
+}
+
+struct Color Game::getColor(int row, int col){
+    if(isCovered(row, col)){
+        return GREEN;
+    }
+    int bottomValue = bottomGrid.at(row).at(col);
+
+    switch(bottomValue){
+        case 0:
+            return BROWN;
+            break;
+
+        case 1:
+            return BLUE;
+            break;
+
+        case 2:
+            return PURPLE;
+            break;
+        
+        case 3:
+            return RED;
+            break;
+        
+        case 4:
+            return ORANGE;
+            break;
+        
+        case 5:
+            return MAROON;
+            break;
+        
+        case 6:
+            return MAROON;
+            break;
+
+        case 7:
+            return MAROON;
+            break;
+
+        case 8:
+            return MAROON;
+            break;
+
+        case 9:
+            return BLACK;
+            break;
+
+        default:
+            return WHITE;
+            break;
+    } 
+}
+
+void Game::revealSquares(Vector2 mousePosition){
+    int rowPosition = mousePosition.x;
+    int colPosition = mousePosition.y;
+
+    std::cout << "X: " << rowPosition << std::endl;
+    std::cout << "Y: " << colPosition << std::endl;
+    std::cout << std::endl;
 }

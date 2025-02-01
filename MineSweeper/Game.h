@@ -13,6 +13,9 @@ class Game{
         void printTopGrid();
         void printBottomGrid();
 
+        void drawGame(int gridWidth, int gridHeight);
+        void revealSquares(struct Vector2 mousePosition);
+
     private:
 
         /*
@@ -36,6 +39,9 @@ class Game{
         //Helper function for addNeighbors
         int getNeighbors(int currentRow, int currentCol);
 
+        struct Color getColor(int row, int col);
+
+        bool isCovered(int row, int col) {return !topGrid.at(row).at(col);}
 
 };
 
