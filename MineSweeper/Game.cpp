@@ -1,13 +1,16 @@
 #include "Game.h"
 #include "include/raylib.h"
 
-Game::Game(int rows, int cols){
+Game::Game(int windowWidth, int windowHeight, int rows, int cols){
 
     srand(GetTime());
 
     gridRows = rows;
     gridCols = cols;
     totalGridSquares = gridCols * gridRows;
+
+    this->windowHeight = windowHeight;
+    this->windowWidth = windowWidth;
 
     std::vector<std::vector<int>> newGrid (gridRows, std::vector<int>(gridCols));
 
@@ -198,10 +201,18 @@ struct Color Game::getColor(int row, int col){
 }
 
 void Game::revealSquares(Vector2 mousePosition){
-    int rowPosition = mousePosition.x;
-    int colPosition = mousePosition.y;
+    int rowPosition = mousePosition.y;
+    int colPosition = mousePosition.x;
 
     std::cout << "X: " << rowPosition << std::endl;
     std::cout << "Y: " << colPosition << std::endl;
-    std::cout << std::endl;
+
+    int currentRow = rowPosition / (windowHeight / gridRows);
+    int currentCol = colPosition / (windowWidth / gridCols);
+
+    topGrid.at(currentRow).at(currentCol) = 1;
+
+    //std::cout << "Row: " << currentRow << std::endl;
+    //std::cout << "Col: " << currentCol << std::endl;
+    //std::cout << std::endl;
 }

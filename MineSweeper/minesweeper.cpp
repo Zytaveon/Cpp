@@ -10,7 +10,7 @@ int main(void){
     int GRIDCOLS = 10;
     int GRIDROWS = 10;
 
-    Game game = Game(GRIDROWS, GRIDCOLS);
+    Game game = Game(WINDOWWIDTH, WINDOWHEIGHT, GRIDROWS, GRIDCOLS);
 
     InitWindow(WINDOWWIDTH, WINDOWHEIGHT, "Minesweeper");
     SetTargetFPS(60);

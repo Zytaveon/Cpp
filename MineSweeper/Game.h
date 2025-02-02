@@ -6,7 +6,7 @@
 
 class Game{
     public:
-        Game(int rows, int cols);
+        Game(int windowWidth, int windowHeight, int rows, int cols);
 
         
         //testerFunctions
@@ -28,6 +28,8 @@ class Game{
         int gridRows;
         int gridCols;
         int totalGridSquares;
+        int windowHeight;
+        int windowWidth;
 
         //To start, mines will be 10% of totalGridSquares, but always aleast one.
         void addMines();
