@@ -45,14 +45,6 @@ class Game{
 
         bool isCovered(int row, int col) {return !topGrid.at(row).at(col);}
 
-        /*
-            revealSquares takes the raw mouseInput and will give it to this function
-
-            This function should uncover multiple squares at a time if there is no
-            number value associated with the square (No mines as its neighbor)
-        */
-        void revealSquaresHelper(int row, int col);
-
 };
 
 #endif
