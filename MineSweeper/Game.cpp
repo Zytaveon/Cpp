@@ -204,15 +204,58 @@ void Game::revealSquares(Vector2 mousePosition){
     int rowPosition = mousePosition.y;
     int colPosition = mousePosition.x;
 
-    std::cout << "X: " << rowPosition << std::endl;
-    std::cout << "Y: " << colPosition << std::endl;
-
     int currentRow = rowPosition / (windowHeight / gridRows);
     int currentCol = colPosition / (windowWidth / gridCols);
 
-    topGrid.at(currentRow).at(currentCol) = 1;
+    revealSquaresHelper(currentRow, currentCol);
+}
 
-    //std::cout << "Row: " << currentRow << std::endl;
-    //std::cout << "Col: " << currentCol << std::endl;
-    //std::cout << std::endl;
+void Game::revealSquaresHelper(int row, int col){
+    //Square already revealed, I don't think should do anything
+    if(!isCovered(row, col)){
+        return;
+    }
+
+    //This is a "number tile" and not their job to reveal any other tiles but their own
+    if(isCovered(row, col) && bottomGrid.at(row).at(col) != 0 && bottomGrid.at(row).at(col) != 9){
+        topGrid.at(row).at(col) = 1;
+        return;
+    }
+
+    if(isCovered(row, col) && bottomGrid.at(row).at(col) == 0){
+        topGrid.at(row).at(col) = 1;
+
+        //Reveal neighbors including "number tiles"
+        if(row > 0 && col > 0){
+            revealSquaresHelper(row - 1, col -1);
+        }
+    
+        if(row > 0){
+            revealSquaresHelper(row - 1, col);
+        }
+
+        if(row > 0 && col < gridCols - 1){
+            revealSquaresHelper(row - 1, col + 1);
+        }
+
+        if(col> 0){
+            revealSquaresHelper(row, col - 1);
+        }
+
+        if(col < gridCols - 1){
+            revealSquaresHelper(row, col + 1);
+        }
+
+        if(row < gridRows - 1 && col > 0){
+            revealSquaresHelper(row + 1, col - 1);
+        }
+
+        if(row < gridRows - 1){
+            revealSquaresHelper(row + 1, col);
+        }
+
+        if(row < gridRows - 1 && col < gridCols - 1){
+            revealSquaresHelper(row + 1, col + 1);
+        }
+    }
 }
