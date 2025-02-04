@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "include/raylib.h"
 
 Game::Game(int windowWidth, int windowHeight, int rows, int cols){
 
@@ -26,6 +25,11 @@ Game::Game(int windowWidth, int windowHeight, int rows, int cols){
     addMines();
     addNeighbors();
 
+}
+
+
+void Game::drawNumber(){
+    DrawText("1", 0, 0, 100, RED);
 }
 
 void Game::printBottomGrid(){

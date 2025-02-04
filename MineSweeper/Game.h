@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include "include/raylib.h"
 
 class Game{
     public:
@@ -14,6 +15,8 @@ class Game{
         void printBottomGrid();
 
         void drawGame(int gridWidth, int gridHeight);
+        //Test function. Should eventually be in draw game function
+        void drawNumber();
         void revealSquares(struct Vector2 mousePosition);
 
     private:
