@@ -27,11 +27,6 @@ Game::Game(int windowWidth, int windowHeight, int rows, int cols){
 
 }
 
-
-void Game::drawNumber(){
-    DrawText("1", 0, 0, 100, RED);
-}
-
 void Game::printBottomGrid(){
     for(int i = 0; i < gridRows; ++i){
         for(int j = 0; j < gridCols; ++j){
@@ -145,6 +140,7 @@ void Game::drawGame(int gridWidth, int gridHeight){
             boxColor = getColor(i, j);
 
             DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, boxColor);
+
         }
     }
     
@@ -263,3 +259,4 @@ void Game::revealSquaresHelper(int row, int col){
         }
     }
 }
+

@@ -23,7 +23,6 @@ int main(void){
         }
 
         game.drawGame(WINDOWWIDTH, WINDOWHEIGHT);
-        game.drawNumber();
 
         EndDrawing();
     }
