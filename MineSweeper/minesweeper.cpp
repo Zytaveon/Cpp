@@ -15,10 +15,12 @@ int main(void){
     InitWindow(WINDOWWIDTH, WINDOWHEIGHT, "Minesweeper");
     SetTargetFPS(60);
 
+    game.LoadResources();
+
     while(!WindowShouldClose()){
         BeginDrawing();
 
-        if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) || IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             game.revealSquares(GetMousePosition());
         }
 
@@ -26,6 +28,8 @@ int main(void){
 
         EndDrawing();
     }
+
+    game.UnloadResources();
 
     CloseWindow();
 

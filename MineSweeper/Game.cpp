@@ -27,6 +27,16 @@ Game::Game(int windowWidth, int windowHeight, int rows, int cols){
 
 }
 
+void Game::LoadResources(){
+    flagBombTexture = LoadTexture("resources/minesweeper.png");
+    numbersTexture = LoadTexture("resources/Numbers.png");
+}
+
+void Game::UnloadResources(){
+    UnloadTexture(flagBombTexture);
+    UnloadTexture(numbersTexture);
+}
+
 void Game::printBottomGrid(){
     for(int i = 0; i < gridRows; ++i){
         for(int j = 0; j < gridCols; ++j){
@@ -132,14 +142,46 @@ void Game::drawGame(int gridWidth, int gridHeight){
     int boxWidth = gridWidth/ gridCols;
     int boxHeight = gridHeight / gridRows;
 
-    Color boxColor = PURPLE;
+    // Color boxColor = PURPLE;
 
     for(int i = 0; i < gridRows; ++i){
         for(int j = 0; j < gridCols; ++j){
 
-            boxColor = getColor(i, j);
+            // boxColor = getColor(i, j);
+            // DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, boxColor);
 
-            DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, boxColor);
+            if(topGrid.at(i).at(j) == 0){
+                DrawRectangle(j*boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, GREEN);
+            }
+
+            else if(topGrid.at(i).at(j) == 9){
+                DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, GREEN);
+                DrawTexturePro(
+                    flagBombTexture,
+                    {0, 0, 32, 32},
+                    {(float)j * boxWidth, (float)i * boxHeight, (float)boxWidth - 1, (float)boxHeight - 1},
+                    {0, 0},
+                    0,
+                    WHITE
+                );
+            }
+
+            else if(bottomGrid.at(i).at(j) == 0){
+                DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, BROWN);
+            }
+
+            else if(bottomGrid.at(i).at(j) != 9){
+                DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, GRAY);
+                DrawTexturePro(
+                    numbersTexture,
+                    {(float)bottomGrid.at(i).at(j) * 32, 0, 32, 32},
+                    {(float)j * boxWidth, (float)i * boxHeight, (float)boxWidth - 1, (float)boxHeight - 1},
+                    {0,0},
+                    0, 
+                    WHITE
+                );
+            }
+
 
         }
     }

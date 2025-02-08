@@ -19,6 +19,9 @@ class Game{
         void drawNumber();
         void revealSquares(struct Vector2 mousePosition);
 
+        void LoadResources();
+        void UnloadResources();
+
     private:
 
         /*
@@ -33,6 +36,9 @@ class Game{
         int totalGridSquares;
         int windowHeight;
         int windowWidth;
+
+        Texture2D flagBombTexture;
+        Texture2D numbersTexture;
 
         //To start, mines will be 10% of totalGridSquares, but always aleast one.
         void addMines();
