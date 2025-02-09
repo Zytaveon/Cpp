@@ -66,6 +66,8 @@ void Game::addMines(){
 
     int randomRow = 0;
     int randomCol = 0;
+
+    srand(time(0));
     
     while(minesCreated < mineSquares){
 
