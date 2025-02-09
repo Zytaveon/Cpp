@@ -150,7 +150,19 @@ void Game::drawGame(int gridWidth, int gridHeight){
             // boxColor = getColor(i, j);
             // DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, boxColor);
 
-            if(topGrid.at(i).at(j) == 0){
+            if(topGrid.at(i).at(j) == 1 && bottomGrid.at(i).at(j) == 9){
+                DrawRectangle(j * boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, DARKGRAY);
+                DrawTexturePro(
+                    flagBombTexture,
+                    {32, 0, 32, 32},
+                    {(float)j * boxWidth, (float) i * boxHeight, (float)boxWidth - 1, (float)boxHeight - 1},
+                    {0,0},
+                    0,
+                    WHITE
+                );
+            }
+
+            else if(topGrid.at(i).at(j) == 0){
                 DrawRectangle(j*boxWidth, i * boxHeight, boxWidth - 1, boxHeight - 1, GREEN);
             }
 
@@ -187,6 +199,32 @@ void Game::drawGame(int gridWidth, int gridHeight){
     }
     
     return;
+}
+
+void Game::flagMine(struct Vector2 mousePosition){
+    int rowPosition = mousePosition.y;
+    int colPosition = mousePosition.x;
+
+    int currentRow = rowPosition / (windowHeight / gridRows);
+    int currentCol = colPosition / (windowWidth / gridCols);
+
+    if(topGrid.at(currentRow).at(currentCol) == 0){
+        topGrid.at(currentRow).at(currentCol) = 9;
+    }
+
+    else if(topGrid.at(currentRow).at(currentCol) == 9){
+        topGrid.at(currentRow).at(currentCol) = 0;
+    }
+}
+
+bool Game::isCovered(int row, int col){
+    if(topGrid.at(row).at(col) == 0 || topGrid.at(row).at(col) == 9){
+        return true;
+    }
+    
+    else{
+        return false;
+    }
 }
 
 struct Color Game::getColor(int row, int col){
@@ -263,6 +301,7 @@ void Game::revealSquaresHelper(int row, int col){
         topGrid.at(row).at(col) = 1;
         return;
     }
+    
 
     if(isCovered(row, col) && bottomGrid.at(row).at(col) == 0){
         topGrid.at(row).at(col) = 1;
@@ -298,6 +337,23 @@ void Game::revealSquaresHelper(int row, int col){
 
         if(row < gridRows - 1 && col < gridCols - 1){
             revealSquaresHelper(row + 1, col + 1);
+        }
+    }
+
+    //Mine tile, so reveal all mines that haven't been flagged
+    //Get rid of flags that aren't on mines
+    if(isCovered(row, col) && bottomGrid.at(row).at(col) == 9){
+        revealMines();
+    }
+}
+
+void Game::revealMines(){
+    
+    for(int i = 0; i < gridRows; ++i){
+        for(int j = 0; j < gridCols; ++j){
+            if(bottomGrid.at(i).at(j) == 9 && topGrid.at(i).at(j) != 9){
+                topGrid.at(i).at(j) = 1;
+            }
         }
     }
 }

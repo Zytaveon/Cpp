@@ -24,6 +24,10 @@ int main(void){
             game.revealSquares(GetMousePosition());
         }
 
+        if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+            game.flagMine(GetMousePosition());
+        }
+
         game.drawGame(WINDOWWIDTH, WINDOWHEIGHT);
 
         EndDrawing();

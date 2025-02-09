@@ -16,8 +16,8 @@ class Game{
 
         void drawGame(int gridWidth, int gridHeight);
         //Test function. Should eventually be in draw game function
-        void drawNumber();
         void revealSquares(struct Vector2 mousePosition);
+        void flagMine(struct Vector2 mousePosition);
 
         void LoadResources();
         void UnloadResources();
@@ -52,7 +52,7 @@ class Game{
 
         struct Color getColor(int row, int col);
 
-        bool isCovered(int row, int col) {return !topGrid.at(row).at(col);}
+        bool isCovered(int row, int col);
 
         /*
             revealSquares takes the raw mouseInput and will give it to this function
@@ -61,6 +61,7 @@ class Game{
             number value associated with the square (No mines as its neighbor)
         */
         void revealSquaresHelper(int row, int col);
+        void revealMines();
 
 };
 
