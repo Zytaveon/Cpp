@@ -1,16 +1,22 @@
 #include "Game.h"
 
-Game::Game(){
-    std::cout << "Hi from this game" << std::endl;
+Game::Game(int windowHeight, int windowWidth){
+    WINDOWWIDTH = windowWidth;
+    WINDOWHEIGHT = windowHeight;
 }
 
 void Game::runGame(){
 
-    InitWindow(500, 500, "Spelunky");
+    InitWindow(WINDOWWIDTH, WINDOWHEIGHT, "Spelunky");
     SetTargetFPS(60);
 
     while(!WindowShouldClose()){
         BeginDrawing();
+        
+        ClearBackground(GRAY);
+
+
+
         EndDrawing();
     }
 

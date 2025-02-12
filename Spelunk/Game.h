@@ -6,11 +6,13 @@
 
 class Game{
     public:
-        Game();
+        Game(int windowHeight, int windowWidth);
 
         void runGame();
     
     private:
+        int WINDOWWIDTH;
+        int WINDOWHEIGHT;
 
 };
 
