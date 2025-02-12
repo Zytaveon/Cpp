@@ -10,15 +10,16 @@ void Game::runGame(){
     InitWindow(WINDOWWIDTH, WINDOWHEIGHT, "Spelunky");
     SetTargetFPS(60);
 
+
     while(!WindowShouldClose()){
         BeginDrawing();
         
         ClearBackground(GRAY);
 
-
-
         EndDrawing();
-    }
 
+
+    }
+    Level gameLevel = Level();
     CloseWindow();
 }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "include/raylib.h"
+#include "level.h"
 
 class Game{
     public:
