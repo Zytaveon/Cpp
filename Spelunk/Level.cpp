@@ -38,7 +38,7 @@ void Level::loadLevel(std::string file){
     while(std::getline(levelFile, currentLine)){
         for(int j = 0; j < 50; ++j){
             //With single digits automatically converts to ASCII value,
-            //so have to minus 0 ASCITT value to get actual value
+            //so have to minus 0 ASCII value to get actual value
             board[i][j] = currentLine.at(j)  - '0';
         }
         ++i;
