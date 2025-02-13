@@ -10,12 +10,12 @@ void Game::runGame(){
     InitWindow(WINDOWWIDTH, WINDOWHEIGHT, "Spelunky");
     SetTargetFPS(60);
     
-    Player player = Player({(float)WINDOWWIDTH/2, (float)WINDOWHEIGHT/2});
+    Player player = Player({100, 100});
     Level level = Level();
 
     Camera2D camera = {0};
     camera.target = player.getPlayerPosition();
-    camera.offset = player.getPlayerPosition();
+    camera.offset = {(float)((WINDOWWIDTH/2) - 25), (float)((WINDOWHEIGHT / 2) - 25)};
     camera.rotation = 0;
     camera.zoom = 1.0f;
 

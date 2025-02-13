@@ -23,7 +23,6 @@ Vector2 Player::getPlayerPosition(){
 
 void Player::moveUp(){
     playerPosition.y -= 4;
-    spriteColor = RED;
 }
 
 void Player::moveDown(){
