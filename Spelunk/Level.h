@@ -5,6 +5,7 @@
 #include <array>
 #include <fstream>
 #include <string>
+#include "include/raylib.h"
 
 class Level{
     public:

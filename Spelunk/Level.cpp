@@ -4,11 +4,30 @@
 Level::Level(){
     currentLevel = 0;
     loadLevel(getLevelFile(currentLevel));
-    printBoard();
 }
 
 void Level::drawLevel(){
 
+    Color blockColor = PURPLE;
+
+    for(int i = 0; i < boardHeight; ++i){
+        for (int j = 0; j < boardWidth; ++j){
+
+            if(board[i][j] == 0){
+                blockColor = WHITE;
+            }
+            else{
+                blockColor = BLACK;
+            }
+
+            DrawRectanglePro(
+                {(float)j * 50, (float)i * 50, 50 - 1, 50 -1 },
+                {0,0},
+                0,
+                blockColor
+            );
+        }
+    }
 }
 
 std::string Level::getLevelFile(int currentLevel){
@@ -42,8 +61,9 @@ void Level::loadLevel(std::string file){
             board[i][j] = currentLine.at(j)  - '0';
         }
         ++i;
+        std::cout << "Level " << i << ":" << currentLine << std::endl;
     }
-
+    std::cout << board[50][50];
     levelFile.close();
 
 }
