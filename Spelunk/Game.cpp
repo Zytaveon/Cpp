@@ -33,7 +33,7 @@ void Game::runGame(){
         }
 
         if(IsKeyDown(KEY_A)){
-            player.moveLeft();
+            player.moveLeft(level);
         }
 
         BeginDrawing();
@@ -44,6 +44,7 @@ void Game::runGame(){
         
         level.drawLevel();
         player.drawPlayer();
+        player.checkCollision(level);
         camera.target = player.getPlayerPosition();
 
         EndMode2D();

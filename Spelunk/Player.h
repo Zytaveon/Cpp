@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "include/raylib.h"
+#include "Level.h"
 
 class Player{
     public:
@@ -13,7 +14,8 @@ class Player{
         void moveUp();
         void moveDown();
         void moveRight();
-        void moveLeft();
+        void moveLeft(Level level);
+        void checkCollision(Level board);
 
         //Test struct
         Color spriteColor = GREEN;

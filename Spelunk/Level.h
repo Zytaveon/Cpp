@@ -11,6 +11,7 @@ class Level{
     public:
         Level();
         void drawLevel();
+        int getCellValue(int row, int col);
 
     private:
         static constexpr int boardHeight = 50;

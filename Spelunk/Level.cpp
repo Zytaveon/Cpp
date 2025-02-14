@@ -30,6 +30,10 @@ void Level::drawLevel(){
     }
 }
 
+int Level::getCellValue(int row, int col){
+    return board[row][col];
+}
+
 std::string Level::getLevelFile(int currentLevel){
 
     std::string fileName;
