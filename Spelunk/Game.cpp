@@ -20,21 +20,9 @@ void Game::runGame(){
     camera.zoom = 1.0f;
 
     while(!WindowShouldClose()){
-        if(IsKeyDown(KEY_W)){
-            player.moveUp();
-        }
 
-        if(IsKeyDown(KEY_S)){
-            player.moveDown();
-        }
 
-        if(IsKeyDown(KEY_D)){
-            player.moveRight();
-        }
-
-        if(IsKeyDown(KEY_A)){
-            player.moveLeft(level);
-        }
+        player.updatePlayer(level);
 
         BeginDrawing();
         

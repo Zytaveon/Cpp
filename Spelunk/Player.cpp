@@ -21,25 +21,72 @@ Vector2 Player::getPlayerPosition(){
     return playerPosition;
 }
 
+void Player::updatePlayer(Level level){
+
+    currentLevel = level;
+
+    if(IsKeyDown(KEY_A)){
+        moveLeft();
+    }
+
+    if(IsKeyDown(KEY_S)){
+        moveDown();
+    }
+
+    if(IsKeyDown(KEY_D)){
+        moveRight();
+    }
+
+    if(IsKeyDown(KEY_W)){
+        moveUp();
+    }
+}
+
 void Player::moveUp(){
-    playerPosition.y -= 4;
+    int movementValue = 4;
+    int currentRowTile = ((playerPosition.y - (playerHeight / 2)) - 1) / 50;
+    int currentColTile = (playerPosition.x - (playerHeight / 2)) / 50;
+
+    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+        movementValue = 0;
+    }
+
+    playerPosition.y -= movementValue;
 }
 
 void Player::moveDown(){
-    playerPosition.y += 4;
+    int movementvalue = 4;
+
+    int currentRowTile = ((playerPosition.y + (playerHeight / 2)) + 1) / 50;
+    int currentColTile = (playerPosition.x) / 50;
+
+    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+        movementvalue = 0;
+    }
+
+    playerPosition.y += movementvalue;
 }
 
 void Player::moveRight(){
-    playerPosition.x += 4;
+    int movementValue = 4;
+
+    int currentRowTile = (playerPosition.y) / 50;
+    int currentColTile = ((playerPosition.x + (playerHeight / 2)) + 1) / 50;
+
+    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+        movementValue = 0;
+    }
+
+    playerPosition.x += movementValue;
 }
 
-void Player::moveLeft(Level level){
+void Player::moveLeft(){
     int movementValue = 4;
 
     int currentRowTile = (playerPosition.y - (playerHeight / 2)) / 50;
-    int currentColTile = (playerPosition.x - (playerWidth / 2)) / 50;
+    int currentColTile = ((playerPosition.x - (playerWidth / 2)) - 1) / 50;
 
-    if(level.getCellValue(currentRowTile, currentColTile) == 1){
+    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
         movementValue = 0;
     }
 

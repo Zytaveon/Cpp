@@ -65,9 +65,7 @@ void Level::loadLevel(std::string file){
             board[i][j] = currentLine.at(j)  - '0';
         }
         ++i;
-        std::cout << "Level " << i << ":" << currentLine << std::endl;
     }
-    std::cout << board[50][50];
     levelFile.close();
 
 }
