@@ -8,23 +8,31 @@
 class Player{
     public:
         Player(Vector2 position);
+
         void drawPlayer();
         Vector2 getPlayerPosition();
         void updatePlayer(Level level);
-
-        void moveUp();
-        void moveDown();
-        void moveRight();
-        void moveLeft();
         void checkCollision(Level board);
 
-        //Test struct
+        //Test variable
         Color spriteColor = GREEN;
+
     private:
         struct Vector2 playerPosition;
         static constexpr int playerWidth = 50;
         static constexpr int playerHeight = 50;
         Level currentLevel;
+
+        static constexpr float maxGravity = 20.0;
+        float currentGravity = 0;
+        float gravityStep = .2;
+
+        void moveUp();
+        void moveDown();
+        void moveRight();
+        void moveLeft();
+        void jump();
+        void checkGravity();
 
 };
 
