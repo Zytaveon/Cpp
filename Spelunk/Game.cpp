@@ -32,7 +32,6 @@ void Game::runGame(){
         
         level.drawLevel();
         player.drawPlayer();
-        player.checkCollision(level);
         camera.target = player.getPlayerPosition();
 
         EndMode2D();

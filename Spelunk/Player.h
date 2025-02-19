@@ -32,7 +32,7 @@ class Player{
         static constexpr float jumpDuration = 0.2;
         
         
-
+        void printPlayerPosition();
         void moveUp();
         void moveDown();
         void moveRight();

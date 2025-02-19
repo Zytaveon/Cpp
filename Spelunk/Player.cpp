@@ -35,6 +35,8 @@ Vector2 Player::getPlayerPosition(){
 
 void Player::updatePlayer(Level level){
 
+    printPlayerPosition();
+
     currentLevel = level;
 
     if(IsKeyDown(KEY_A)){
@@ -55,7 +57,6 @@ void Player::updatePlayer(Level level){
 
     if(IsKeyDown(KEY_SPACE) && jumping == false && readyTojump){
         jump();
-        std::cout << "jumping" << std::endl; 
     }
 
     if(jumping){
@@ -66,30 +67,6 @@ void Player::updatePlayer(Level level){
         checkGravity();
     }
 
-
-}
-
-
-void Player::checkCollision(Level board){
-    bool collision = false;
-
-    //Check Collisions
-    std::cout << "Player Position -> X: " << playerPosition.x << " Y: " << playerPosition.y << std::endl;
-
-    int currentRowTile = playerPosition.y / 50;
-    int currentColTile = playerPosition.x / 50;
-
-    if(board.getCellValue(currentRowTile, currentColTile) == 1){
-        collision = true;
-    }
-
-    //Change color of sprite depending on collision value
-    if(collision){
-        spriteColor = RED;
-    }
-    else{
-        spriteColor = GREEN;
-    }
 }
 
 /*
@@ -97,6 +74,10 @@ void Player::checkCollision(Level board){
 -----   PRIVATE FUNCTIONS   -------
 -----------------------------------
 */
+
+void Player::printPlayerPosition(){
+    std::cout << "Player Position -> X: " << playerPosition.x << " Y: " << playerPosition.y << std::endl;
+}
 
 void Player::moveUp(){
     int movementValue = 4;
