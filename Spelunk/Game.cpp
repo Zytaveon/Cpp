@@ -40,6 +40,6 @@ void Game::runGame(){
 
 
     }
-
+    level.unloadtextures();
     CloseWindow();
 }

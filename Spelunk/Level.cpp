@@ -4,6 +4,7 @@
 Level::Level(){
     currentLevel = 0;
     loadLevel(getLevelFile(currentLevel));
+    loadTextures();
 }
 
 void Level::drawLevel(){
@@ -26,12 +27,33 @@ void Level::drawLevel(){
                 0,
                 blockColor
             );
+
+            //DrawTexturePro(
+                // textures,
+                // {(float)textureSize * board[i][j], 0, (float)textureSize, (float)textureSize},
+                // {(float)j * 50, (float)i * 50, 50 - 1, 50 - 1},
+                // {0,0},
+                // 0.0f,
+                // WHITE
+            // );
         }
     }
 }
 
 int Level::getCellValue(int row, int col){
     return board[row][col];
+}
+
+void Level::loadTextures(){
+
+    if(currentLevel == 0){
+        textures = LoadTexture("resources/Spelunky_Terrain.png");
+    }
+
+}
+
+void Level::unloadtextures(){
+    UnloadTexture(textures);
 }
 
 std::string Level::getLevelFile(int currentLevel){

@@ -12,8 +12,14 @@ class Level{
         Level();
         void drawLevel();
         int getCellValue(int row, int col);
+        void loadTextures();
+        void unloadtextures();
 
     private:
+
+        int textureSize = 32;
+        Texture2D textures = {};
+
         static constexpr int boardHeight = 50;
         static constexpr int boardWidth = 50;
 
