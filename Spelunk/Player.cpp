@@ -53,7 +53,18 @@ void Player::updatePlayer(Level level){
         // moveUp();
     // }
 
-    checkGravity();
+    if(IsKeyDown(KEY_SPACE) && jumping == false && readyTojump){
+        jump();
+        std::cout << "jumping" << std::endl; 
+    }
+
+    if(jumping){
+        checkjump();
+    }
+    
+    else{
+        checkGravity();
+    }
 
 
 }
@@ -139,7 +150,9 @@ void Player::moveLeft(){
 }
 
 void Player::jump(){
-    return;
+    jumping = true;
+    jumpTime = GetTime();
+    readyTojump = false;
 }
 
 /*
@@ -183,6 +196,18 @@ void Player::checkGravity(){
         }
     }
 
+    if(currentGravity == 0){
+        readyTojump = true;
+    }
+
     playerPosition.y += currentGravity;
 
+}
+
+void Player::checkjump(){
+    if(GetTime() - jumpTime >= jumpDuration){
+        jumping = false;
+    }
+
+    playerPosition.y -= 4;
 }

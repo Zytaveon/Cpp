@@ -26,6 +26,12 @@ class Player{
         static constexpr float maxGravity = 20.0;
         float currentGravity = 0;
         float gravityStep = .2;
+        bool jumping = false;
+        bool readyTojump = false;
+        float jumpTime;
+        static constexpr float jumpDuration = 0.2;
+        
+        
 
         void moveUp();
         void moveDown();
@@ -33,6 +39,7 @@ class Player{
         void moveLeft();
         void jump();
         void checkGravity();
+        void checkjump();
 
 };
 
