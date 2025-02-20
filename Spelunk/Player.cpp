@@ -109,7 +109,6 @@ void Player::moveDown(){
 void Player::moveRight(){
     int movementValue = movementSpeed;
 
-    /*
     int currentRowTile = (playerPosition.y) / 50;
     int currentColTile = ((playerPosition.x + (playerHeight / 2)) + 1) / 50;
 
@@ -118,39 +117,7 @@ void Player::moveRight(){
     }
 
     playerPosition.x += movementValue;
-    */
 
-    std::vector<Vector2> corners;
-
-    Vector2 topCorner ={
-        playerPosition.x + (playerWidth / 2),
-        playerPosition.y - (playerHeight / 2)
-    };
-
-    Vector2 middle = {
-        playerPosition.x + (playerWidth / 2),
-        playerPosition.y
-    };
-
-    Vector2 bottomCorner = {
-        playerPosition.x + (playerWidth / 2),
-        playerPosition.y + (playerHeight / 2)
-    };
-
-    corners.push_back(topCorner);
-    corners.push_back(middle);
-    corners.push_back(bottomCorner);
-
-    for(int i = 0; i < corners.size(); ++i){
-        if(currentLevel.getCellValue(
-            (corners.at(i).y) / 50,
-            (corners.at(i).x + 1) / 50
-        ) == 1){
-            movementValue = 0;
-        }
-    }
-
-    playerPosition.x += movementValue;
 }
 
 void Player::moveLeft(){
@@ -180,7 +147,6 @@ void Player::checkGravity(){
     
     //These are the bottom corners, because thats what needs to be checked when falling
     //If either of these are touching a "wall" or "floor", character shouldn't fall
-
     Vector2 playerLeftCorner = {
         playerPosition.x + playerWidth / 2,
         (playerPosition.y + playerHeight / 2)
@@ -218,13 +184,39 @@ void Player::checkGravity(){
     }
 
     if(currentLevel.getCellValue((playerLeftCorner.y / 50) + 1, playerLeftCorner.x / 50) == 1){
-        std::cout << "Hello!" << std::endl;
-        if(gravityStep > ((((playerLeftCorner. y / 50) + 1) * 50) - 1) - playerLeftCorner.y){
-            currentGravity = ((((playerLeftCorner. y / 50) + 1) * 50)) - playerLeftCorner.y;
+        if(gravityStep > ((((playerLeftCorner.y / 50) + 1) * 50) - 1) - playerLeftCorner.y){
+            currentGravity = ((((playerLeftCorner.y / 50) + 1) * 50)) - playerLeftCorner.y;
         }
     }
 
+    //playerPosition.y += currentGravity;
+
+    int currentCell = playerPosition.y / 50;
+    int cellBelow = currentCell + 1;
+    int cellBelowTopValue = cellBelow * 50;
+    int spaceBetween = cellBelowTopValue - playerPosition.y;
+    bool cellBelowWall = false;
+
+    if(currentLevel.getCellValue((playerPosition.y / 50) + 1, playerLeftCorner.x) == 1){
+        cellBelowWall = true;
+    }
+    else{
+        cellBelowWall = false;
+    }
+
+    std::cout << "CurrentCell: " << currentCell << " CellBelow: " << cellBelow << std::endl;
+    std::cout << "Value of the top of the below Cell: " << cellBelowTopValue << std::endl;
+    std::cout << "Space Between Current and Below (From center of player): " << spaceBetween << std::endl;
+    std::cout << "Is the cell below a wall?: " << cellBelowWall << std::endl;
+
+    std::cout << std::endl;
+
+    if(cellBelowWall && spaceBetween < playerHeight/2 + (currentGravity) && currentGravity != 0){
+        currentGravity = spaceBetween - (playerHeight / 2);
+    }
+
     playerPosition.y += currentGravity;
+
 
 }
 
