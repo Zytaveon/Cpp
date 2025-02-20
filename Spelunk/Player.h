@@ -4,6 +4,7 @@
 #include <iostream>
 #include "include/raylib.h"
 #include "Level.h"
+#include <vector>
 
 class Player{
     public:
@@ -22,6 +23,8 @@ class Player{
         static constexpr int playerWidth = 50;
         static constexpr int playerHeight = 50;
         Level currentLevel;
+
+        int movementSpeed = 4;
 
         static constexpr float maxGravity = 20.0;
         float currentGravity = 0;

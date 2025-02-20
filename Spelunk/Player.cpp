@@ -79,6 +79,7 @@ void Player::printPlayerPosition(){
     std::cout << "Player Position -> X: " << playerPosition.x << " Y: " << playerPosition.y << std::endl;
 }
 
+//I dont think this will be used later
 void Player::moveUp(){
     int movementValue = 4;
     int currentRowTile = ((playerPosition.y - (playerHeight / 2)) - 1) / 50;
@@ -91,6 +92,7 @@ void Player::moveUp(){
     playerPosition.y -= movementValue;
 }
 
+//I dont think this will be used later
 void Player::moveDown(){
     int movementvalue = 4;
 
@@ -105,13 +107,47 @@ void Player::moveDown(){
 }
 
 void Player::moveRight(){
-    int movementValue = 4;
+    int movementValue = movementSpeed;
 
+    /*
     int currentRowTile = (playerPosition.y) / 50;
     int currentColTile = ((playerPosition.x + (playerHeight / 2)) + 1) / 50;
 
     if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
         movementValue = 0;
+    }
+
+    playerPosition.x += movementValue;
+    */
+
+    std::vector<Vector2> corners;
+
+    Vector2 topCorner ={
+        playerPosition.x + (playerWidth / 2),
+        playerPosition.y - (playerHeight / 2)
+    };
+
+    Vector2 middle = {
+        playerPosition.x + (playerWidth / 2),
+        playerPosition.y
+    };
+
+    Vector2 bottomCorner = {
+        playerPosition.x + (playerWidth / 2),
+        playerPosition.y + (playerHeight / 2)
+    };
+
+    corners.push_back(topCorner);
+    corners.push_back(middle);
+    corners.push_back(bottomCorner);
+
+    for(int i = 0; i < corners.size(); ++i){
+        if(currentLevel.getCellValue(
+            (corners.at(i).y) / 50,
+            (corners.at(i).x + 1) / 50
+        ) == 1){
+            movementValue = 0;
+        }
     }
 
     playerPosition.x += movementValue;
@@ -147,19 +183,19 @@ void Player::checkGravity(){
 
     Vector2 playerLeftCorner = {
         playerPosition.x + playerWidth / 2,
-        (playerPosition.y + playerHeight / 2) + 1
+        (playerPosition.y + playerHeight / 2)
     };
 
     Vector2 playerRightCorner = {
         playerPosition.x - playerWidth / 2,
-        (playerPosition.y + playerHeight / 2) + 1
+        (playerPosition.y + playerHeight / 2)
     };
 
-    if(currentLevel.getCellValue(playerLeftCorner.y / 50, playerLeftCorner.x / 50) == 1){
+    if(currentLevel.getCellValue((playerLeftCorner.y + 1) / 50, playerLeftCorner.x / 50) == 1){
         currentGravity = 0;
     }
 
-    else if(currentLevel.getCellValue(playerRightCorner.y / 50, playerRightCorner.x / 50) == 1){
+    else if(currentLevel.getCellValue((playerRightCorner.y + 1) / 50, playerRightCorner.x / 50) == 1){
         currentGravity = 0;
     }
 
@@ -179,6 +215,13 @@ void Player::checkGravity(){
 
     if(currentGravity == 0){
         readyTojump = true;
+    }
+
+    if(currentLevel.getCellValue((playerLeftCorner.y / 50) + 1, playerLeftCorner.x / 50) == 1){
+        std::cout << "Hello!" << std::endl;
+        if(gravityStep > ((((playerLeftCorner. y / 50) + 1) * 50) - 1) - playerLeftCorner.y){
+            currentGravity = ((((playerLeftCorner. y / 50) + 1) * 50)) - playerLeftCorner.y;
+        }
     }
 
     playerPosition.y += currentGravity;

@@ -28,7 +28,7 @@ void Level::drawLevel(){
                 blockColor
             );
 
-            //DrawTexturePro(
+            // DrawTexturePro(
                 // textures,
                 // {(float)textureSize * board[i][j], 0, (float)textureSize, (float)textureSize},
                 // {(float)j * 50, (float)i * 50, 50 - 1, 50 - 1},
