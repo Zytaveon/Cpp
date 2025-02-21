@@ -49,6 +49,7 @@ void Player::updatePlayer(Level level){
 
     if(IsKeyDown(KEY_D)){
         moveRight();
+        // moveRightPro();
     }
 
     // if(IsKeyDown(KEY_W)){
@@ -77,6 +78,24 @@ void Player::updatePlayer(Level level){
 
 void Player::printPlayerPosition(){
     std::cout << "Player Position -> X: " << playerPosition.x << " Y: " << playerPosition.y << std::endl;
+}
+
+void Player::moveRightPro(){
+    float playerRightEdge = playerPosition.x + (playerWidth / 2);
+    float playerTopEdge = playerPosition.y - (playerHeight / 2);
+    float playerBottomEdge = playerPosition.y + (playerHeight / 2);
+
+    float movement = movementSpeed;
+
+    if(currentLevel.getCellValue(playerBottomEdge / 50, (playerRightEdge + movement) / 50) == 1){
+        movement = 0;
+    }
+    
+    if(currentLevel.getCellValue(playerTopEdge / 50, (playerRightEdge + movement) / 50) == 1){
+        movement = 0;
+    }
+
+    playerPosition.x += movement;
 }
 
 //I dont think this will be used later
@@ -218,6 +237,10 @@ void Player::checkGravity(){
     playerPosition.y += currentGravity;
 
 
+}
+
+void Player::checkGravityPro(){
+    return;
 }
 
 void Player::checkjump(){
