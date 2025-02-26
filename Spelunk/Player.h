@@ -37,12 +37,12 @@ class Player{
         
         void printPlayerPosition();
 
-        void moveRightPro();
-
         void moveUp();
         void moveDown();
         void moveRight();
+        void moveRightPro();
         void moveLeft();
+        void moveLeftPro();
         void jump();
         void checkGravity();
         void checkGravityPro();

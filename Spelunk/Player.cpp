@@ -35,12 +35,12 @@ Vector2 Player::getPlayerPosition(){
 
 void Player::updatePlayer(Level level){
 
-    printPlayerPosition();
+    // printPlayerPosition();
 
     currentLevel = level;
 
     if(IsKeyDown(KEY_A)){
-        moveLeft();
+        moveLeftPro();
     }
 
     // if(IsKeyDown(KEY_S)){
@@ -48,7 +48,7 @@ void Player::updatePlayer(Level level){
     // }
 
     if(IsKeyDown(KEY_D)){
-        moveRight();
+        moveRightPro();
         // moveRightPro();
     }
 
@@ -65,7 +65,8 @@ void Player::updatePlayer(Level level){
     }
     
     else{
-        checkGravity();
+        // checkGravity();
+        checkGravityPro();
     }
 
 }
@@ -80,23 +81,6 @@ void Player::printPlayerPosition(){
     std::cout << "Player Position -> X: " << playerPosition.x << " Y: " << playerPosition.y << std::endl;
 }
 
-void Player::moveRightPro(){
-    float playerRightEdge = playerPosition.x + (playerWidth / 2);
-    float playerTopEdge = playerPosition.y - (playerHeight / 2);
-    float playerBottomEdge = playerPosition.y + (playerHeight / 2);
-
-    float movement = movementSpeed;
-
-    if(currentLevel.getCellValue(playerBottomEdge / 50, (playerRightEdge + movement) / 50) == 1){
-        movement = 0;
-    }
-    
-    if(currentLevel.getCellValue(playerTopEdge / 50, (playerRightEdge + movement) / 50) == 1){
-        movement = 0;
-    }
-
-    playerPosition.x += movement;
-}
 
 //I dont think this will be used later
 void Player::moveUp(){
@@ -139,6 +123,40 @@ void Player::moveRight(){
 
 }
 
+//Written by ChatGPT because was frustrated with clipping and wanted to move on. Sad I know.
+void Player::moveRightPro() {
+    float nextX = playerPosition.x + movementSpeed; // Predict next X position
+
+    // Get right-side corners (top and bottom)
+    Vector2 topRight = {nextX + playerWidth / 2, playerPosition.y - playerHeight / 2 - 1};
+    Vector2 bottomRight = {nextX + playerWidth / 2, playerPosition.y + playerHeight / 2 - 1};
+
+    // Convert to grid coordinates
+    int gridX = topRight.x / 50;
+    int gridTopY = topRight.y / 50;
+    int gridBottomY = bottomRight.y / 50;
+
+    // Check if either right-side corner collides with a wall
+    bool collidingWithWall = 
+        currentLevel.getCellValue(gridTopY, gridX) == 1 || 
+        currentLevel.getCellValue(gridBottomY, gridX) == 1;
+
+    if (collidingWithWall) {
+        // Stop movement and snap to wall
+        playerPosition.x = gridX * 50 - playerWidth / 2;
+    } else {
+        // Move player normally
+        playerPosition.x += movementSpeed;
+    }
+
+    std::cout << "Top Right Grid: (" << gridX << ", " << gridTopY << ") Value: " 
+          << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
+    std::cout << "Bottom Right Grid: (" << gridX << ", " << gridBottomY << ") Value: " 
+          << currentLevel.getCellValue(gridBottomY, gridX) << std::endl;
+
+}
+
+
 void Player::moveLeft(){
     int movementValue = 4;
 
@@ -150,7 +168,43 @@ void Player::moveLeft(){
     }
 
     playerPosition.x -= movementValue;
+
+    
 }
+
+//Written by ChatGPT because was frustrated with clipping and wanted to move on. Sad I know.
+void Player::moveLeftPro() {
+    float nextX = playerPosition.x - movementSpeed; // Predict next X position
+
+    // Get left-side corners (top and bottom)
+    Vector2 topLeft = {nextX - playerWidth / 2, playerPosition.y - playerHeight / 2 - 1};
+    Vector2 bottomLeft = {nextX - playerWidth / 2, playerPosition.y + playerHeight / 2 - 1};
+
+    // Convert to grid coordinates
+    int gridX = topLeft.x / 50;
+    int gridTopY = topLeft.y / 50;
+    int gridBottomY = bottomLeft.y / 50;
+
+    // Check if either left-side corner collides with a wall
+    bool collidingWithWall = 
+        currentLevel.getCellValue(gridTopY, gridX) == 1 || 
+        currentLevel.getCellValue(gridBottomY, gridX) == 1;
+
+    if (collidingWithWall) {
+        // Stop movement and snap to wall
+        playerPosition.x = (gridX + 1) * 50 + playerWidth / 2;
+    } else {
+        // Move player normally
+        playerPosition.x -= movementSpeed;
+    }
+
+    std::cout << "Top Left Grid: (" << gridX << ", " << gridTopY << ") Value: " 
+          << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
+    std::cout << "Bottom Left Grid: (" << gridX << ", " << gridBottomY << ") Value: " 
+          << currentLevel.getCellValue(gridBottomY, gridX) << std::endl;
+
+}
+
 
 void Player::jump(){
     jumping = true;
@@ -167,20 +221,20 @@ void Player::checkGravity(){
     //These are the bottom corners, because thats what needs to be checked when falling
     //If either of these are touching a "wall" or "floor", character shouldn't fall
     Vector2 playerLeftCorner = {
-        playerPosition.x + playerWidth / 2,
-        (playerPosition.y + playerHeight / 2)
+        playerPosition.x - playerWidth / 2,
+        playerPosition.y + playerHeight / 2
     };
 
     Vector2 playerRightCorner = {
-        playerPosition.x - playerWidth / 2,
-        (playerPosition.y + playerHeight / 2)
+        playerPosition.x + playerWidth / 2,
+        playerPosition.y + playerHeight / 2
     };
 
-    if(currentLevel.getCellValue((playerLeftCorner.y + 1) / 50, playerLeftCorner.x / 50) == 1){
+    if(currentLevel.getCellValue((int)(playerLeftCorner.y + 1) / 50, (int)playerLeftCorner.x / 50) == 1){
         currentGravity = 0;
     }
 
-    else if(currentLevel.getCellValue((playerRightCorner.y + 1) / 50, playerRightCorner.x / 50) == 1){
+    else if(currentLevel.getCellValue((int)(playerRightCorner.y + 1) / 50, (int)playerRightCorner.x / 50) == 1){
         currentGravity = 0;
     }
 
@@ -202,7 +256,7 @@ void Player::checkGravity(){
         readyTojump = true;
     }
 
-    if(currentLevel.getCellValue((playerLeftCorner.y / 50) + 1, playerLeftCorner.x / 50) == 1){
+    if(currentLevel.getCellValue((int)(playerLeftCorner.y / 50) + 1, (int)playerLeftCorner.x / 50) == 1){
         if(gravityStep > ((((playerLeftCorner.y / 50) + 1) * 50) - 1) - playerLeftCorner.y){
             currentGravity = ((((playerLeftCorner.y / 50) + 1) * 50)) - playerLeftCorner.y;
         }
@@ -216,7 +270,7 @@ void Player::checkGravity(){
     int spaceBetween = cellBelowTopValue - playerPosition.y;
     bool cellBelowWall = false;
 
-    if(currentLevel.getCellValue((playerPosition.y / 50) + 1, playerLeftCorner.x) == 1){
+    if(currentLevel.getCellValue((int)(playerPosition.y / 50) + 1, (int)playerLeftCorner.x) == 1){
         cellBelowWall = true;
     }
     else{
@@ -239,9 +293,36 @@ void Player::checkGravity(){
 
 }
 
+//Written by ChatGPT because was frustrated with clipping and wanted to move on. Sad I know.
 void Player::checkGravityPro(){
-    return;
+
+    float nextY = playerPosition.y + currentGravity; // Predict next Y position
+
+    // Get bottom corners (left and right)
+    Vector2 bottomLeft = {playerPosition.x - playerWidth / 2, nextY + playerHeight / 2};
+    Vector2 bottomRight = {playerPosition.x + playerWidth / 2, nextY + playerHeight / 2};
+
+    // Convert to grid coordinates
+    int gridLeftX = bottomLeft.x / 50;
+    int gridRightX = bottomRight.x / 50;
+    int gridY = bottomLeft.y / 50;
+
+    // Check if either bottom corner collides with the ground
+    bool collidingWithGround = 
+        currentLevel.getCellValue(gridY, gridLeftX) == 1 || 
+        currentLevel.getCellValue(gridY, gridRightX) == 1;
+
+    if (collidingWithGround) {
+        currentGravity = 0;  // Stop falling
+        readyTojump = true;
+        playerPosition.y = gridY * 50 - playerHeight / 2; // Snap to floor
+    } else {
+        currentGravity += gravityStep; // Apply gravity normally
+        if (currentGravity > maxGravity) currentGravity = maxGravity;
+        playerPosition.y += currentGravity; // Move the player down
+    }
 }
+
 
 void Player::checkjump(){
     if(GetTime() - jumpTime >= jumpDuration){
