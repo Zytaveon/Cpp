@@ -317,6 +317,7 @@ void Player::checkGravityPro(){
         readyTojump = true;
         playerPosition.y = gridY * 50 - playerHeight / 2; // Snap to floor
     } else {
+        readyTojump = false;
         currentGravity += gravityStep; // Apply gravity normally
         if (currentGravity > maxGravity) currentGravity = maxGravity;
         playerPosition.y += currentGravity; // Move the player down
