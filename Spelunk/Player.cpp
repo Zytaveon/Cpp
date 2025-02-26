@@ -62,12 +62,12 @@ void Player::updatePlayer(Level* level){
 
     if(jumping){
         checkjumpPro();
-    }
-    
-    else{
+    }else{
         // checkGravity();
         checkGravityPro();
     }
+
+    checkCollectable();
 
 }
 
@@ -155,9 +155,9 @@ void Player::moveRightPro() {
         playerPosition.x += movementSpeed;
     }
 
-    if(Collectable){
-        currentLevel->grabCollectable(gridBottomY, gridX);
-    }
+    // if(Collectable){
+        // currentLevel->grabCollectable(gridBottomY, gridX);
+    // }
 
     // std::cout << "Top Right Grid: (" << gridX << ", " << gridTopY << ") Value: " 
         //   << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
@@ -359,5 +359,11 @@ void Player::checkjumpPro() {
         playerPosition.y -= 4;  // Move up only if there’s no ceiling
     } else {
         jumping = false;  // Stop jumping if ceiling is hit
+    }
+}
+
+void::Player::checkCollectable(){
+    if(currentLevel->getCellValue(playerPosition.y/50, playerPosition.x/50) == 2){
+        currentLevel->grabCollectable(playerPosition.y/50, playerPosition.x/50);
     }
 }

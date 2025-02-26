@@ -49,6 +49,8 @@ class Player{
         void checkjump();
         void checkjumpPro();
 
+        void checkCollectable();
+
 };
 
 #endif
