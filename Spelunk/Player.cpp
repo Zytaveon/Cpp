@@ -303,8 +303,8 @@ void Player::checkGravityPro(){
     Vector2 bottomRight = {playerPosition.x + playerWidth / 2, nextY + playerHeight / 2};
 
     // Convert to grid coordinates
-    int gridLeftX = bottomLeft.x / 50;
-    int gridRightX = bottomRight.x / 50;
+    int gridLeftX = (bottomLeft.x + 1) / 50;
+    int gridRightX = (bottomRight.x - 1) / 50;
     int gridY = bottomLeft.y / 50;
 
     // Check if either bottom corner collides with the ground
