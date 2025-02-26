@@ -22,7 +22,7 @@ void Game::runGame(){
     while(!WindowShouldClose()){
 
 
-        player.updatePlayer(level);
+        player.updatePlayer(&level);
 
         BeginDrawing();
         
@@ -40,6 +40,7 @@ void Game::runGame(){
 
 
     }
+
     level.unloadtextures();
     CloseWindow();
 }

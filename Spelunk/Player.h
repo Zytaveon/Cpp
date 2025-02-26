@@ -12,7 +12,7 @@ class Player{
 
         void drawPlayer();
         Vector2 getPlayerPosition();
-        void updatePlayer(Level level);
+        void updatePlayer(Level* level);
         void checkCollision(Level board);
 
         //Test variable
@@ -22,7 +22,7 @@ class Player{
         struct Vector2 playerPosition;
         static constexpr int playerWidth = 50;
         static constexpr int playerHeight = 50;
-        Level currentLevel;
+        Level* currentLevel;
 
         int movementSpeed = 4;
 
@@ -47,6 +47,7 @@ class Player{
         void checkGravity();
         void checkGravityPro();
         void checkjump();
+        void checkjumpPro();
 
 };
 

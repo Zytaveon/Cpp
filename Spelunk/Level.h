@@ -16,6 +16,8 @@ class Level{
         void loadTextures();
         void unloadtextures();
 
+        void printBoard();
+
     private:
 
         int textureSize = 32;
@@ -31,7 +33,7 @@ class Level{
         void loadLevel(std::string file);
 
         //Tester Functions
-        void printBoard();
+        // void printBoard();
 
 
 

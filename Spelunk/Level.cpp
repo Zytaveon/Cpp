@@ -56,7 +56,7 @@ int Level::getCellValue(int row, int col){
 }
 
 void Level::grabCollectable(int row, int col){
-    std::cout << "hello!" << std::endl;
+    std::cout << "Grab Collectable Row: " << row << " Col: " << col << std::endl;
     if(board[row][col] != 2){
         std::cout <<"ERROR IN GRABBING COLLECTABLE" << std::endl;
     }

@@ -33,7 +33,7 @@ Vector2 Player::getPlayerPosition(){
     return playerPosition;
 }
 
-void Player::updatePlayer(Level level){
+void Player::updatePlayer(Level* level){
 
     // printPlayerPosition();
 
@@ -61,7 +61,7 @@ void Player::updatePlayer(Level level){
     }
 
     if(jumping){
-        checkjump();
+        checkjumpPro();
     }
     
     else{
@@ -88,7 +88,7 @@ void Player::moveUp(){
     int currentRowTile = ((playerPosition.y - (playerHeight / 2)) - 1) / 50;
     int currentColTile = (playerPosition.x - (playerHeight / 2)) / 50;
 
-    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+    if(currentLevel->getCellValue(currentRowTile, currentColTile) == 1){
         movementValue = 0;
     }
 
@@ -102,7 +102,7 @@ void Player::moveDown(){
     int currentRowTile = ((playerPosition.y + (playerHeight / 2)) + 1) / 50;
     int currentColTile = (playerPosition.x) / 50;
 
-    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+    if(currentLevel->getCellValue(currentRowTile, currentColTile) == 1){
         movementvalue = 0;
     }
 
@@ -115,7 +115,7 @@ void Player::moveRight(){
     int currentRowTile = (playerPosition.y) / 50;
     int currentColTile = ((playerPosition.x + (playerHeight / 2)) + 1) / 50;
 
-    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+    if(currentLevel->getCellValue(currentRowTile, currentColTile) == 1){
         movementValue = 0;
     }
 
@@ -129,8 +129,8 @@ void Player::moveRightPro() {
     float nextX = playerPosition.x + movementSpeed; // Predict next X position
 
     // Get right-side corners (top and bottom)
-    Vector2 topRight = {nextX + playerWidth / 2, playerPosition.y - playerHeight / 2 - 1};
-    Vector2 bottomRight = {nextX + playerWidth / 2, playerPosition.y + playerHeight / 2 - 1};
+    Vector2 topRight = {nextX + playerWidth / 2 - 1, playerPosition.y - (playerHeight / 2) + 3};
+    Vector2 bottomRight = {nextX + playerWidth / 2 - 1, playerPosition.y + (playerHeight / 2) - 1};
 
     // Convert to grid coordinates
     int gridX = topRight.x / 50;
@@ -139,12 +139,12 @@ void Player::moveRightPro() {
 
     // Check if either right-side corner collides with a wall
     bool collidingWithWall = 
-        currentLevel.getCellValue(gridTopY, gridX) == 1 || 
-        currentLevel.getCellValue(gridBottomY, gridX) == 1;
+        currentLevel->getCellValue(gridTopY, gridX) == 1 || 
+        currentLevel->getCellValue(gridBottomY, gridX) == 1;
     
     bool Collectable = 
-        currentLevel.getCellValue(gridTopY, gridX) == 2 || 
-        currentLevel.getCellValue(gridBottomY, gridX) == 2;
+        currentLevel->getCellValue(gridTopY, gridX) == 2 || 
+        currentLevel->getCellValue(gridBottomY, gridX) == 2;
 
     if (collidingWithWall) {
         // Stop movement and snap to wall
@@ -156,7 +156,7 @@ void Player::moveRightPro() {
     }
 
     if(Collectable){
-        currentLevel.grabCollectable(gridBottomY, gridX);
+        currentLevel->grabCollectable(gridBottomY, gridX);
     }
 
     // std::cout << "Top Right Grid: (" << gridX << ", " << gridTopY << ") Value: " 
@@ -173,7 +173,7 @@ void Player::moveLeft(){
     int currentRowTile = (playerPosition.y - (playerHeight / 2)) / 50;
     int currentColTile = ((playerPosition.x - (playerWidth / 2)) - 1) / 50;
 
-    if(currentLevel.getCellValue(currentRowTile, currentColTile) == 1){
+    if(currentLevel->getCellValue(currentRowTile, currentColTile) == 1){
         movementValue = 0;
     }
 
@@ -187,8 +187,8 @@ void Player::moveLeftPro() {
     float nextX = playerPosition.x - movementSpeed; // Predict next X position
 
     // Get left-side corners (top and bottom)
-    Vector2 topLeft = {nextX - playerWidth / 2, playerPosition.y - playerHeight / 2 - 1};
-    Vector2 bottomLeft = {nextX - playerWidth / 2, playerPosition.y + playerHeight / 2 - 1};
+    Vector2 topLeft = {nextX - playerWidth / 2 + 1, playerPosition.y - (playerHeight / 2) + 3};
+    Vector2 bottomLeft = {nextX - playerWidth / 2 + 1,  playerPosition.y + playerHeight / 2 - 1};
 
     // Convert to grid coordinates
     int gridX = topLeft.x / 50;
@@ -197,8 +197,8 @@ void Player::moveLeftPro() {
 
     // Check if either left-side corner collides with a wall
     bool collidingWithWall = 
-        currentLevel.getCellValue(gridTopY, gridX) == 1 || 
-        currentLevel.getCellValue(gridBottomY, gridX) == 1;
+        currentLevel->getCellValue(gridTopY, gridX) == 1 || 
+        currentLevel->getCellValue(gridBottomY, gridX) == 1;
 
     if (collidingWithWall) {
         // Stop movement and snap to wall
@@ -240,11 +240,11 @@ void Player::checkGravity(){
         playerPosition.y + playerHeight / 2
     };
 
-    if(currentLevel.getCellValue((int)(playerLeftCorner.y + 1) / 50, (int)playerLeftCorner.x / 50) == 1){
+    if(currentLevel->getCellValue((int)(playerLeftCorner.y + 1) / 50, (int)playerLeftCorner.x / 50) == 1){
         currentGravity = 0;
     }
 
-    else if(currentLevel.getCellValue((int)(playerRightCorner.y + 1) / 50, (int)playerRightCorner.x / 50) == 1){
+    else if(currentLevel->getCellValue((int)(playerRightCorner.y + 1) / 50, (int)playerRightCorner.x / 50) == 1){
         currentGravity = 0;
     }
 
@@ -266,7 +266,7 @@ void Player::checkGravity(){
         readyTojump = true;
     }
 
-    if(currentLevel.getCellValue((int)(playerLeftCorner.y / 50) + 1, (int)playerLeftCorner.x / 50) == 1){
+    if(currentLevel->getCellValue((int)(playerLeftCorner.y / 50) + 1, (int)playerLeftCorner.x / 50) == 1){
         if(gravityStep > ((((playerLeftCorner.y / 50) + 1) * 50) - 1) - playerLeftCorner.y){
             currentGravity = ((((playerLeftCorner.y / 50) + 1) * 50)) - playerLeftCorner.y;
         }
@@ -280,7 +280,7 @@ void Player::checkGravity(){
     int spaceBetween = cellBelowTopValue - playerPosition.y;
     bool cellBelowWall = false;
 
-    if(currentLevel.getCellValue((int)(playerPosition.y / 50) + 1, (int)playerLeftCorner.x) == 1){
+    if(currentLevel->getCellValue((int)(playerPosition.y / 50) + 1, (int)playerLeftCorner.x) == 1){
         cellBelowWall = true;
     }
     else{
@@ -319,8 +319,8 @@ void Player::checkGravityPro(){
 
     // Check if either bottom corner collides with the ground
     bool collidingWithGround = 
-        currentLevel.getCellValue(gridY, gridLeftX) == 1 || 
-        currentLevel.getCellValue(gridY, gridRightX) == 1;
+        currentLevel->getCellValue(gridY, gridLeftX) == 1 || 
+        currentLevel->getCellValue(gridY, gridRightX) == 1;
 
     if (collidingWithGround) {
         currentGravity = 0;  // Stop falling
@@ -341,4 +341,23 @@ void Player::checkjump(){
     }
 
     playerPosition.y -= 4;
+}
+
+void Player::checkjumpPro() {
+    if (GetTime() - jumpTime >= jumpDuration) {
+        jumping = false;
+    }
+
+    // Check if there's a ceiling tile above the player
+    Vector2 playerTopLeft = {playerPosition.x - playerWidth / 2, playerPosition.y - playerHeight / 2};
+    Vector2 playerTopRight = {playerPosition.x + playerWidth / 2, playerPosition.y - playerHeight / 2};
+
+    bool hitCeiling = (currentLevel->getCellValue((playerTopLeft.y - 1) / 50, playerTopLeft.x / 50) == 1) ||
+                      (currentLevel->getCellValue((playerTopRight.y - 1) / 50, playerTopRight.x / 50) == 1);
+
+    if (!hitCeiling) {
+        playerPosition.y -= 4;  // Move up only if there’s no ceiling
+    } else {
+        jumping = false;  // Stop jumping if ceiling is hit
+    }
 }
