@@ -119,6 +119,7 @@ void Player::moveRight(){
         movementValue = 0;
     }
 
+
     playerPosition.x += movementValue;
 
 }
@@ -140,19 +141,28 @@ void Player::moveRightPro() {
     bool collidingWithWall = 
         currentLevel.getCellValue(gridTopY, gridX) == 1 || 
         currentLevel.getCellValue(gridBottomY, gridX) == 1;
+    
+    bool Collectable = 
+        currentLevel.getCellValue(gridTopY, gridX) == 2 || 
+        currentLevel.getCellValue(gridBottomY, gridX) == 2;
 
     if (collidingWithWall) {
         // Stop movement and snap to wall
         playerPosition.x = gridX * 50 - playerWidth / 2;
-    } else {
+    } 
+    else {
         // Move player normally
         playerPosition.x += movementSpeed;
     }
 
-    std::cout << "Top Right Grid: (" << gridX << ", " << gridTopY << ") Value: " 
-          << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
-    std::cout << "Bottom Right Grid: (" << gridX << ", " << gridBottomY << ") Value: " 
-          << currentLevel.getCellValue(gridBottomY, gridX) << std::endl;
+    if(Collectable){
+        currentLevel.grabCollectable(gridBottomY, gridX);
+    }
+
+    // std::cout << "Top Right Grid: (" << gridX << ", " << gridTopY << ") Value: " 
+        //   << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
+    // std::cout << "Bottom Right Grid: (" << gridX << ", " << gridBottomY << ") Value: " 
+        //   << currentLevel.getCellValue(gridBottomY, gridX) << std::endl;
 
 }
 
@@ -198,10 +208,10 @@ void Player::moveLeftPro() {
         playerPosition.x -= movementSpeed;
     }
 
-    std::cout << "Top Left Grid: (" << gridX << ", " << gridTopY << ") Value: " 
-          << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
-    std::cout << "Bottom Left Grid: (" << gridX << ", " << gridBottomY << ") Value: " 
-          << currentLevel.getCellValue(gridBottomY, gridX) << std::endl;
+    // std::cout << "Top Left Grid: (" << gridX << ", " << gridTopY << ") Value: " 
+        //   << currentLevel.getCellValue(gridTopY, gridX) << std::endl;
+    // std::cout << "Bottom Left Grid: (" << gridX << ", " << gridBottomY << ") Value: " 
+        //   << currentLevel.getCellValue(gridBottomY, gridX) << std::endl;
 
 }
 

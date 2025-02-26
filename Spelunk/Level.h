@@ -12,6 +12,7 @@ class Level{
         Level();
         void drawLevel();
         int getCellValue(int row, int col);
+        void grabCollectable(int row, int col);
         void loadTextures();
         void unloadtextures();
 

@@ -9,16 +9,27 @@ Level::Level(){
 
 void Level::drawLevel(){
 
+    //Error color. Should get changed later
     Color blockColor = PURPLE;
 
     for(int i = 0; i < boardHeight; ++i){
         for (int j = 0; j < boardWidth; ++j){
 
+            //Open Space
             if(board[i][j] == 0){
                 blockColor = WHITE;
             }
-            else{
+            //Wall
+            else if(board[i][j] == 1){
                 blockColor = BLACK;
+            }
+            //Coin/Collectable
+            else if(board[i][j] == 2){
+                blockColor = YELLOW;
+            }
+            //Should never happen
+            else{
+                blockColor = PURPLE;
             }
 
             DrawRectanglePro(
@@ -42,6 +53,17 @@ void Level::drawLevel(){
 
 int Level::getCellValue(int row, int col){
     return board[row][col];
+}
+
+void Level::grabCollectable(int row, int col){
+    std::cout << "hello!" << std::endl;
+    if(board[row][col] != 2){
+        std::cout <<"ERROR IN GRABBING COLLECTABLE" << std::endl;
+    }
+    else{
+        board[row][col] = 0;
+    }
+
 }
 
 void Level::loadTextures(){
