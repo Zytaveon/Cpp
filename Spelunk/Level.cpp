@@ -27,6 +27,14 @@ void Level::drawLevel(){
             else if(board[i][j] == 2){
                 blockColor = YELLOW;
             }
+            //Shop to use coins
+            else if(board[i][j] == 3){
+                blockColor = BLUE;
+            }
+            //End of Level
+            else if(board[i][j] == 9){
+                blockColor = PINK;
+            }
             //Should never happen
             else{
                 blockColor = PURPLE;

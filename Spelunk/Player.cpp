@@ -43,9 +43,9 @@ void Player::updatePlayer(Level* level){
         moveLeftPro();
     }
 
-    // if(IsKeyDown(KEY_S)){
-        // moveDown();
-    // }
+    if(IsKeyDown(KEY_S)){
+        stopjumo();
+    }
 
     if(IsKeyDown(KEY_D)){
         moveRightPro();
@@ -360,6 +360,10 @@ void Player::checkjumpPro() {
     } else {
         jumping = false;  // Stop jumping if ceiling is hit
     }
+}
+
+void Player::stopjumo(){
+    jumping = false;
 }
 
 void::Player::checkCollectable(){

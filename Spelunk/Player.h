@@ -32,7 +32,7 @@ class Player{
         bool jumping = false;
         bool readyTojump = false;
         float jumpTime;
-        static constexpr float jumpDuration = 0.2;
+        static constexpr float jumpDuration = 0.3;
         
         
         void printPlayerPosition();
@@ -48,6 +48,7 @@ class Player{
         void checkGravityPro();
         void checkjump();
         void checkjumpPro();
+        void stopjumo();
 
         void checkCollectable();
 
