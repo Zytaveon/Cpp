@@ -32,9 +32,12 @@ void Game::runGame(){
         
         level.drawLevel();
         player.drawPlayer();
+        // level.drawShop();
         camera.target = player.getPlayerPosition();
 
         EndMode2D();
+
+        level.drawShop();
 
         EndDrawing();
 

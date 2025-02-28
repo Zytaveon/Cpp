@@ -11,8 +11,11 @@ class Level{
     public:
         Level();
         void drawLevel();
+        void drawShop();
         int getCellValue(int row, int col);
         void grabCollectable(int row, int col);
+        void enableShop();
+        void disableShop();
         void loadTextures();
         void unloadtextures();
 
@@ -28,6 +31,8 @@ class Level{
 
         int board[boardHeight][boardWidth];
         int currentLevel;
+
+        bool shopEnabled = false;
 
         std::string getLevelFile(int currentLevel);
         void loadLevel(std::string file);

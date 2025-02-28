@@ -68,6 +68,7 @@ void Player::updatePlayer(Level* level){
     }
 
     checkCollectable();
+    checkShop();
 
 }
 
@@ -370,4 +371,12 @@ void::Player::checkCollectable(){
     if(currentLevel->getCellValue(playerPosition.y/50, playerPosition.x/50) == 2){
         currentLevel->grabCollectable(playerPosition.y/50, playerPosition.x/50);
     }
+}
+
+void::Player::checkShop(){
+    if(IsKeyPressed(KEY_B) && !shopEnabled &&
+        currentLevel->getCellValue(playerPosition.y / 50, playerPosition.x / 50) == 3){
+            currentLevel->enableShop();
+            shopEnabled = true;
+        }
 }

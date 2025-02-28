@@ -33,6 +33,8 @@ class Player{
         bool readyTojump = false;
         float jumpTime;
         static constexpr float jumpDuration = 0.3;
+
+        bool shopEnabled = false;
         
         
         void printPlayerPosition();
@@ -51,6 +53,7 @@ class Player{
         void stopjumo();
 
         void checkCollectable();
+        void checkShop();
 
 };
 
