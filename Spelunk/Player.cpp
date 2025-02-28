@@ -39,15 +39,15 @@ void Player::updatePlayer(Level* level){
 
     currentLevel = level;
 
-    if(IsKeyDown(KEY_A)){
+    if(IsKeyDown(KEY_A) && !shopEnabled){
         moveLeftPro();
     }
 
-    if(IsKeyDown(KEY_S)){
+    if(IsKeyDown(KEY_S) && !shopEnabled){
         stopjumo();
     }
 
-    if(IsKeyDown(KEY_D)){
+    if(IsKeyDown(KEY_D) && !shopEnabled){
         moveRightPro();
         // moveRightPro();
     }
@@ -56,7 +56,7 @@ void Player::updatePlayer(Level* level){
         // moveUp();
     // }
 
-    if(IsKeyDown(KEY_SPACE) && jumping == false && readyTojump){
+    if(IsKeyDown(KEY_SPACE) && jumping == false && readyTojump && !shopEnabled){
         jump();
     }
 
@@ -379,4 +379,9 @@ void::Player::checkShop(){
             currentLevel->enableShop();
             shopEnabled = true;
         }
+    
+    else if(IsKeyPressed(KEY_B) && shopEnabled){
+        currentLevel->disableShop();
+        shopEnabled = false;
+    }
 }
