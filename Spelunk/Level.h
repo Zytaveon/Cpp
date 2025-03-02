@@ -11,7 +11,6 @@ class Level{
     public:
         Level();
         void drawLevel();
-        void drawShop();
         int getCellValue(int row, int col);
         void grabCollectable(int row, int col);
         void enableShop();

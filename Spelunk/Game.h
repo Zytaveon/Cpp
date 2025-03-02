@@ -5,6 +5,7 @@
 #include "include/raylib.h"
 #include "Level.h"
 #include "Player.h"
+#include "Shop.h"
 
 class Game{
     public:

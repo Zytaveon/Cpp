@@ -6,13 +6,15 @@
 #include "Level.h"
 #include <vector>
 
+class Shop;
+
 class Player{
     public:
         Player(Vector2 position);
 
         void drawPlayer();
         Vector2 getPlayerPosition();
-        void updatePlayer(Level* level);
+        void updatePlayer(Level* level, Shop* shop);
         void checkCollision(Level board);
 
         //Test variable
@@ -23,6 +25,7 @@ class Player{
         static constexpr int playerWidth = 50;
         static constexpr int playerHeight = 50;
         Level* currentLevel;
+        Shop* currentShop;
 
         int movementSpeed = 4;
 

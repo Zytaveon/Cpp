@@ -59,17 +59,6 @@ void Level::drawLevel(){
     }
 }
 
-void::Level::drawShop(){
-    if(shopEnabled){
-    DrawRectanglePro(
-        {175, 175, 450, 450},
-        {0,0},
-        0,
-        BROWN
-    );
-    }
-}
-
 int Level::getCellValue(int row, int col){
     return board[row][col];
 }

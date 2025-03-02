@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Shop.h"
 
 /*
 ------------------------------------------
@@ -33,11 +34,13 @@ Vector2 Player::getPlayerPosition(){
     return playerPosition;
 }
 
-void Player::updatePlayer(Level* level){
+void Player::updatePlayer(Level* level, Shop* shop){
 
     // printPlayerPosition();
 
     currentLevel = level;
+    currentShop = shop;
+    // currentShop = shop;
 
     if(IsKeyDown(KEY_A) && !shopEnabled){
         moveLeftPro();
@@ -376,12 +379,12 @@ void::Player::checkCollectable(){
 void::Player::checkShop(){
     if(IsKeyPressed(KEY_B) && !shopEnabled &&
         currentLevel->getCellValue(playerPosition.y / 50, playerPosition.x / 50) == 3){
-            currentLevel->enableShop();
+            currentShop->activateShop();
             shopEnabled = true;
         }
     
     else if(IsKeyPressed(KEY_B) && shopEnabled){
-        currentLevel->disableShop();
+        currentShop->disableShop();
         shopEnabled = false;
     }
 }

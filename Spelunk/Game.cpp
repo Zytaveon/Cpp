@@ -12,6 +12,8 @@ void Game::runGame(){
     
     Player player = Player({100, 100});
     Level level = Level();
+    Shop shop = Shop(&player);
+    
 
     Camera2D camera = {0};
     camera.target = player.getPlayerPosition();
@@ -22,7 +24,7 @@ void Game::runGame(){
     while(!WindowShouldClose()){
 
 
-        player.updatePlayer(&level);
+        player.updatePlayer(&level, &shop);
 
         BeginDrawing();
         
@@ -36,8 +38,9 @@ void Game::runGame(){
         camera.target = player.getPlayerPosition();
 
         EndMode2D();
-
-        level.drawShop();
+        if(shop.isShopActive()){
+            shop.drawShop(WINDOWWIDTH, WINDOWHEIGHT);
+        }
 
         EndDrawing();
 
