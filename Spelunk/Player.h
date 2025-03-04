@@ -13,6 +13,7 @@ class Player{
         Player(Vector2 position);
 
         void drawPlayer();
+        void drawGold();
         Vector2 getPlayerPosition();
         void updatePlayer(Level* level, Shop* shop);
         void checkCollision(Level board);
@@ -38,7 +39,7 @@ class Player{
         static constexpr float jumpDuration = 0.3;
 
         bool shopEnabled = false;
-        
+        int playerGold;
         
         void printPlayerPosition();
 
@@ -57,6 +58,7 @@ class Player{
 
         void checkCollectable();
         void checkShop();
+        int getPlayerGold();
 
 };
 

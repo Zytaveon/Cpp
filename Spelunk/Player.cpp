@@ -13,6 +13,7 @@ Player::Player(Vector2 position){
     position.y = position.y - playerHeight / 2;
 
     playerPosition = position;
+    playerGold = 0;
 }
 
 /*
@@ -28,6 +29,10 @@ void Player::drawPlayer(){
         0,
         spriteColor
     );
+}
+
+void Player::drawGold(){
+    return;
 }
 
 Vector2 Player::getPlayerPosition(){
@@ -373,6 +378,7 @@ void Player::stopjumo(){
 void::Player::checkCollectable(){
     if(currentLevel->getCellValue(playerPosition.y/50, playerPosition.x/50) == 2){
         currentLevel->grabCollectable(playerPosition.y/50, playerPosition.x/50);
+        playerGold += 10;
     }
 }
 
@@ -387,4 +393,8 @@ void::Player::checkShop(){
         currentShop->disableShop();
         shopEnabled = false;
     }
+}
+
+int Player::getPlayerGold(){
+    return playerGold;
 }
