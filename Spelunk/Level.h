@@ -43,6 +43,12 @@ class Level{
         //Tester Functions
         // void printBoard();
 
+        enum levelValues{
+            SPACE = 48,
+            WALL = 49,
+            COLLECTABLE = 67
+        };
+
 
 
 };

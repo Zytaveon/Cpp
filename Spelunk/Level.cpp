@@ -16,16 +16,16 @@ void Level::drawLevel(){
         for (int j = 0; j < boardWidth; ++j){
 
             //Open Space
-            if(board[i][j] ==  48){
+            if(board[i][j] == SPACE){
                 blockColor = WHITE;
             }
 
             //Wall
-            else if(board[i][j] == 49){
+            else if(board[i][j] == WALL){
                 blockColor = BLACK;
             }
 
-            else if(board[i][j] == 67){
+            else if(board[i][j] == COLLECTABLE){
                 blockColor = YELLOW;
             }
 
