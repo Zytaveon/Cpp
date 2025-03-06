@@ -15,12 +15,10 @@ void Level::drawLevel(){
     for(int i = 0; i < boardHeight; ++i){
         for (int j = 0; j < boardWidth; ++j){
 
-            //Open Space
             if(board[i][j] == SPACE){
                 blockColor = WHITE;
             }
 
-            //Wall
             else if(board[i][j] == WALL){
                 blockColor = BLACK;
             }
@@ -118,6 +116,7 @@ void Level::loadLevel(std::string file){
                 //Want the player starting block to be open space
                 //Need to get playerPosition from P in level
                 board[i][j] = '0';
+                playerStart = {(float)j * 50, (float)i * 50};
             }
 
             else{
