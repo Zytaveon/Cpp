@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "include/raylib.h";
+#include "include/raylib.h"
 
 class Character{
     public:
@@ -9,7 +9,10 @@ class Character{
         Character();
 
         void updateCharacter();
+
+        void setPosition(Vector2 newPosition);
         Vector2 getPosition();
+        
 
     private:
 
@@ -19,7 +22,7 @@ class Character{
 
 class Player : public Character{
     public:
-
+        
     private:
 };
 

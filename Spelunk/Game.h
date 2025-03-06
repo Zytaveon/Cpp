@@ -4,7 +4,7 @@
 #include <iostream>
 #include "include/raylib.h"
 #include "Level.h"
-#include "Player.h"
+#include "Character.h"
 #include "Shop.h"
 
 class Game{

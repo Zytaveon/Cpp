@@ -9,7 +9,7 @@
 
 class Level{
     public:
-        Level();
+        Level(int startingLevel);
         void drawLevel();
         int getCellValue(int row, int col);
         void grabCollectable(int row, int col);
@@ -19,6 +19,8 @@ class Level{
         void unloadtextures();
 
         void printBoard();
+
+        Vector2 getPlayerStartPos();
 
     private:
 
@@ -35,6 +37,8 @@ class Level{
 
         std::string getLevelFile(int currentLevel);
         void loadLevel(std::string file);
+
+        Vector2 playerStart;
 
         //Tester Functions
         // void printBoard();

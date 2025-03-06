@@ -1,8 +1,8 @@
 #include "Level.h"
 
 //Will get the defualt level currently
-Level::Level(){
-    currentLevel = 0;
+Level::Level(int startingLevel){
+    currentLevel = startingLevel;
     loadLevel(getLevelFile(currentLevel));
     loadTextures();
 }
@@ -16,25 +16,19 @@ void Level::drawLevel(){
         for (int j = 0; j < boardWidth; ++j){
 
             //Open Space
-            if(board[i][j] == 0){
+            if(board[i][j] ==  48){
                 blockColor = WHITE;
             }
+
             //Wall
-            else if(board[i][j] == 1){
+            else if(board[i][j] == 49){
                 blockColor = BLACK;
             }
-            //Coin/Collectable
-            else if(board[i][j] == 2){
+
+            else if(board[i][j] == 67){
                 blockColor = YELLOW;
             }
-            //Shop to use coins
-            else if(board[i][j] == 3){
-                blockColor = BLUE;
-            }
-            //End of Level
-            else if(board[i][j] == 9){
-                blockColor = PINK;
-            }
+
             //Should never happen
             else{
                 blockColor = PURPLE;
@@ -119,9 +113,16 @@ void Level::loadLevel(std::string file){
 
     while(std::getline(levelFile, currentLine)){
         for(int j = 0; j < 50; ++j){
-            //With single digits automatically converts to ASCII value,
-            //so have to minus 0 ASCII value to get actual value
-            board[i][j] = currentLine.at(j)  - '0';
+
+            if(currentLine.at(j) == 'P'){
+                //Want the player starting block to be open space
+                //Need to get playerPosition from P in level
+                board[i][j] = '0';
+            }
+
+            else{
+                board[i][j] = currentLine.at(j);
+            }
         }
         ++i;
     }
@@ -136,4 +137,8 @@ void Level::printBoard(){
         }
         std::cout << std::endl;
     }
+}
+
+Vector2 Level::getPlayerStartPos(){
+    return playerStart;
 }
