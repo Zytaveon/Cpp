@@ -42,25 +42,44 @@ void Character::moveRight(){
 
     // Check if either right-side corner collides with a wall
     bool collidingWithWall = 
-        currentLevel->getCellValue(gridTopY, gridX) == 1 || 
-        currentLevel->getCellValue(gridBottomY, gridX) == 1;
+        currentLevel->getCellValue(gridTopY, gridX) == static_cast<int>(LevelValues::WALL) || 
+        currentLevel->getCellValue(gridBottomY, gridX) == static_cast<int>(LevelValues::WALL);
     
-    bool Collectable = 
-        currentLevel->getCellValue(gridTopY, gridX) == 2 || 
-        currentLevel->getCellValue(gridBottomY, gridX) == 2;
-
     if (collidingWithWall) {
         // Stop movement and snap to wall
         position.x = gridX * 50 - characterWidth / 2;
     } 
     else {
-        // Move player normally
+        // Move character normally
         position.x += movementSpeed;
     }
 }
 
 
 void Character:: moveLeft(){
+    float nextX = position.x - movementSpeed; // Predict next X position
+
+    // Get left-side corners (top and bottom)
+    Vector2 topLeft = {nextX - characterWidth / 2 + 1, position.y - (characterHeight / 2) + 3};
+    Vector2 bottomLeft = {nextX - characterWidth / 2 + 1,  position.y + characterHeight / 2 - 1};
+
+    // Convert to grid coordinates
+    int gridX = topLeft.x / 50;
+    int gridTopY = topLeft.y / 50;
+    int gridBottomY = bottomLeft.y / 50;
+
+    // Check if either left-side corner collides with a wall
+    bool collidingWithWall = 
+        currentLevel->getCellValue(gridTopY, gridX) == static_cast<int>(LevelValues::WALL) || 
+        currentLevel->getCellValue(gridBottomY, gridX) == static_cast<int>(LevelValues::WALL);
+
+    if (collidingWithWall) {
+        // Stop movement and snap to wall
+        position.x = (gridX + 1) * 50 + characterWidth / 2;
+    } else {
+        // Move player normally
+        position.x -= movementSpeed;
+    }
 }
 
 /*
@@ -82,6 +101,10 @@ void Player::updatePlayer(Level* level){
 
     if(IsKeyDown(KEY_D)){
         moveRight();
+    }
+
+    if(IsKeyDown(KEY_A)){
+        moveLeft();
     }
 }
 

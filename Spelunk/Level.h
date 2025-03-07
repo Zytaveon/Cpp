@@ -7,6 +7,13 @@
 #include <string>
 #include "include/raylib.h"
 
+enum class LevelValues{
+    SPACE = 48,
+    WALL = 49,
+    COLLECTABLE = 67,
+    PLAYER = 80
+};
+
 class Level{
     public:
         Level(int startingLevel);
