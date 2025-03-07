@@ -23,12 +23,17 @@ void Game::runGame(){
 
         BeginDrawing();
 
-        camera.target = player.getPosition();
-        BeginMode2D(camera);
         ClearBackground(GRAY);
+        player.updatePlayer(&level);
+        camera.target = player.getPosition();
+
+        BeginMode2D(camera);
         
         level.drawLevel();
+        player.drawPlayer();
+
         EndMode2D();
+
         EndDrawing();
 
 
