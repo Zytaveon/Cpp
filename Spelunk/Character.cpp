@@ -82,6 +82,61 @@ void Character:: moveLeft(){
     }
 }
 
+void Character::gravity(){
+
+    float nextY = position.y + currentGravity; // Predict next Y position
+
+    // Get bottom corners (left and right)
+    Vector2 bottomLeft = {position.x - characterWidth / 2, nextY + characterHeight / 2};
+    Vector2 bottomRight = {position.x + characterWidth / 2, nextY + characterHeight / 2};
+
+    // Convert to grid coordinates
+    int gridLeftX = (bottomLeft.x + 1) / 50;
+    int gridRightX = (bottomRight.x - 1) / 50;
+    int gridY = bottomLeft.y / 50;
+
+    // Check if either bottom corner collides with the ground
+    bool collidingWithGround = 
+        currentLevel->getCellValue(gridY, gridLeftX) == static_cast<int>(LevelValues::WALL) || 
+        currentLevel->getCellValue(gridY, gridRightX) == static_cast<int>(LevelValues::WALL);
+
+    if (collidingWithGround) {
+        currentGravity = 0;  // Stop falling
+        readyTojump = true;
+        position.y = gridY * 50 - characterHeight / 2; // Snap to floor
+    } else {
+        readyTojump = false;
+        currentGravity += gravityStep; // Apply gravity normally
+        if (currentGravity > maxGravity) currentGravity = maxGravity;
+        position.y += currentGravity; // Move the player down
+    }
+}
+
+void Character::jump(){
+    jumping = true;
+    jumpTime = GetTime();
+    readyTojump = false;
+}
+
+void Character::checkjump() {
+    if (GetTime() - jumpTime >= jumpDuration) {
+        jumping = false;
+    }
+
+    // Check if there's a ceiling tile above the player
+    Vector2 playerTopLeft = {position.x - characterWidth / 2, position.y - characterHeight / 2};
+    Vector2 playerTopRight = {position.x + characterWidth / 2, position.y - characterHeight / 2};
+
+    bool hitCeiling = (currentLevel->getCellValue((playerTopLeft.y - 1) / 50, playerTopLeft.x / 50) == static_cast<int>(LevelValues::WALL)) ||
+                      (currentLevel->getCellValue((playerTopRight.y - 1) / 50, playerTopRight.x / 50) == static_cast<int>(LevelValues::WALL));
+
+    if (!hitCeiling) {
+        position.y -= 4;  // Move up only if there’s no ceiling
+    } else {
+        jumping = false;  // Stop jumping if ceiling is hit
+    }
+}
+
 /*
     Player Functions
 */
@@ -106,6 +161,18 @@ void Player::updatePlayer(Level* level){
     if(IsKeyDown(KEY_A)){
         moveLeft();
     }
+
+    if(IsKeyDown(KEY_SPACE) && jumping == false && readyTojump){
+        jump();
+    }
+
+    if(jumping){
+        checkjump();
+    }else{
+        gravity();
+    }
+
+    gravity();
 }
 
 

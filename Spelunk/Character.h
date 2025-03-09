@@ -17,17 +17,30 @@ class Character{
     protected:
 
         Vector2 position;
-        float characterWidth = 25;
-        float characterHeight = 25;
+        float characterWidth = 50;
+        float characterHeight = 50;
         Level* currentLevel;
+
+        bool jumping = false;
+        bool readyTojump = false;
+
 
         void moveRight();
         void moveLeft();
+        void gravity();
+        void jump();
+        void checkjump();
         
         
     private:
 
         float movementSpeed = 4.0;
+        float gravityStep = 0.2;
+        float maxGravity = 20.0;
+        float currentGravity = 0;
+        float jumpTime;
+        float jumpDuration = 1.0;
+
 
 
 };
