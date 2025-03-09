@@ -110,6 +110,10 @@ void Character::gravity(){
         if (currentGravity > maxGravity) currentGravity = maxGravity;
         position.y += currentGravity; // Move the player down
     }
+
+    // if(currentGravity != 0.0){
+    //    std::cout << "CurrentGravity -> " << currentGravity << std::endl;
+    // }
 }
 
 void Character::jump(){
@@ -148,7 +152,7 @@ void Player::drawPlayer(){
         playerColor
     );
 
-    std::cout << "Player Position -> X: " << position.x << " Y: " << position.y << std::endl;
+    //std::cout << "Player Position -> X: " << position.x << " Y: " << position.y << std::endl;
 }
 
 void Player::updatePlayer(Level* level){
@@ -172,7 +176,6 @@ void Player::updatePlayer(Level* level){
         gravity();
     }
 
-    gravity();
 }
 
 

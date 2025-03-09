@@ -36,10 +36,10 @@ class Character{
 
         float movementSpeed = 4.0;
         float gravityStep = 0.2;
-        float maxGravity = 20.0;
+        float maxGravity = 10.0;
         float currentGravity = 0;
         float jumpTime;
-        float jumpDuration = 1.0;
+        float jumpDuration = 0.3;
 
 
 
