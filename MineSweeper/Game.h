@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "include/raylib.h"
+#include "Shop.h"
 
 class Game{
     public:

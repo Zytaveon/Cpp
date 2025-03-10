@@ -11,7 +11,8 @@ enum class LevelValues{
     SPACE = 48,
     WALL = 49,
     COLLECTABLE = 67,
-    PLAYER = 80
+    PLAYER = 80,
+    SHOP = 83
 };
 
 class Level{
@@ -50,12 +51,6 @@ class Level{
         //Tester Functions
         // void printBoard();
 
-        enum levelValues{
-            SPACE = 48,
-            WALL = 49,
-            COLLECTABLE = 67,
-            PLAYER = 80
-        };
 
 
 

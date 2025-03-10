@@ -15,16 +15,20 @@ void Level::drawLevel(){
     for(int i = 0; i < boardHeight; ++i){
         for (int j = 0; j < boardWidth; ++j){
 
-            if(board[i][j] == SPACE){
+            if(board[i][j] == static_cast<int>(LevelValues::SPACE)){
                 blockColor = WHITE;
             }
 
-            else if(board[i][j] == WALL){
+            else if(board[i][j] == static_cast<int>(LevelValues::WALL)){
                 blockColor = BLACK;
             }
 
-            else if(board[i][j] == COLLECTABLE){
+            else if(board[i][j] == static_cast<int>(LevelValues::COLLECTABLE)){
                 blockColor = YELLOW;
+            }
+
+            else if(board[i][j] == static_cast<int>(LevelValues::SHOP)){
+                blockColor = PINK;
             }
 
             //Should never happen

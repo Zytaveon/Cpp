@@ -1,9 +1,8 @@
 #include "Shop.h"
-#include "Player.h"
 #include "include/raylib.h"
 
-Shop::Shop(Player* player){
-    currentPlayer = player;
+Shop::Shop(){
+    // currentPlayer = player;
     activeShop = false;
 };
 
@@ -22,6 +21,7 @@ void Shop::drawShop(int windowWidth, int windowHeighth){
 }
 
 bool Shop::isShopActive(){
+
     return activeShop;
 }
 

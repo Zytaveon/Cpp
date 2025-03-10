@@ -13,6 +13,7 @@ void Game::runGame(){
     Level level = Level(0);
     Player player = Player();
     player.setPosition(level.getPlayerStartPos());
+    Shop shop = Shop();
 
     Camera2D camera = {0};
     camera.offset = {(float)((WINDOWWIDTH/2) - 25), (float)((WINDOWHEIGHT / 2) - 25)};
@@ -21,10 +22,22 @@ void Game::runGame(){
 
     while(!WindowShouldClose()){
 
+        if(level.getCellValue(player.getPosition().y / 50, player.getPosition().x / 50) == static_cast<int>(LevelValues::SHOP) && IsKeyPressed(KEY_B) && !shop.isShopActive()){
+            shop.activateShop();
+        }
+        else if(shop.isShopActive() && IsKeyPressed(KEY_B)){
+            shop.disableShop();
+        }
+        
+
         BeginDrawing();
 
         ClearBackground(GRAY);
-        player.updatePlayer(&level);
+
+        if(!shop.isShopActive()){
+            player.updatePlayer(&level);
+        }
+        // player.updatePlayer(&level);
         camera.target = player.getPosition();
 
         BeginMode2D(camera);
@@ -33,6 +46,10 @@ void Game::runGame(){
         player.drawPlayer();
 
         EndMode2D();
+
+        if(shop.isShopActive()){
+            shop.drawShop(WINDOWWIDTH, WINDOWHEIGHT);
+        }
 
         EndDrawing();
 

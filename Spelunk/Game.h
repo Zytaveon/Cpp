@@ -17,6 +17,7 @@ class Game{
         int WINDOWWIDTH;
         int WINDOWHEIGHT;
 
+
 };
 
 #endif
