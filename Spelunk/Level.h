@@ -24,7 +24,7 @@ class Level{
         void disableShop();
         void loadTextures();
         void unloadtextures();
-
+        void changeBoardSquare(int row, int col, int newValue);
         void printBoard();
 
         Vector2 getPlayerStartPos();

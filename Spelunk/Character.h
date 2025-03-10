@@ -57,6 +57,9 @@ class Player : public Character{
         Color playerColor = GREEN;
         int playerWidth = 50;
         int playerHeight = 50;
+        int playerGold = 0;
+
+        void grabCollectable();
 };
 
 class Monster : public Character{

@@ -176,6 +176,18 @@ void Player::updatePlayer(Level* level){
         gravity();
     }
 
+    if(currentLevel->getCellValue(position.y / 50, position.x / 50) == static_cast<int>(LevelValues::COLLECTABLE)){
+        grabCollectable();      
+    }
+
+}
+
+void Player::grabCollectable(){
+    std::cout << "Got collectable!" << std::endl;
+
+    playerGold += 10;
+    currentLevel->changeBoardSquare(position.y / 50, position.x / 50, static_cast<int>(LevelValues::SPACE));
+
 }
 
 

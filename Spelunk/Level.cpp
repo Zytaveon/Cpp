@@ -129,6 +129,15 @@ void Level::loadLevel(std::string file){
 
 }
 
+void Level::changeBoardSquare(int row, int col, int newValue){
+    if(row >= boardHeight || col >= boardWidth){
+        std::cout << "Out of bounds, can't change board value" << std::endl;
+    }
+    else{
+        board[row][col] = newValue;
+    }
+}
+
 void Level::printBoard(){
     for(int i = 0; i < boardHeight; ++i){
         for(int j = 0; j < boardWidth; ++j){
