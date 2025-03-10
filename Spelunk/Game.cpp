@@ -10,34 +10,43 @@ void Game::runGame(){
     InitWindow(WINDOWWIDTH, WINDOWHEIGHT, "Spelunky");
     SetTargetFPS(60);
     
-    Player player = Player({100, 100});
-    Level level = Level();
-    Shop shop = Shop(&player);
-    
+    Level level = Level(0);
+    Player player = Player();
+    player.setPosition(level.getPlayerStartPos());
+    Shop shop = Shop();
 
     Camera2D camera = {0};
-    camera.target = player.getPlayerPosition();
     camera.offset = {(float)((WINDOWWIDTH/2) - 25), (float)((WINDOWHEIGHT / 2) - 25)};
     camera.rotation = 0;
     camera.zoom = 1.0f;
 
     while(!WindowShouldClose()){
 
-
-        player.updatePlayer(&level, &shop);
+        if(level.getCellValue(player.getPosition().y / 50, player.getPosition().x / 50) == static_cast<int>(LevelValues::SHOP) && IsKeyPressed(KEY_B) && !shop.isShopActive()){
+            shop.activateShop();
+        }
+        else if(shop.isShopActive() && IsKeyPressed(KEY_B)){
+            shop.disableShop();
+        }
+        
 
         BeginDrawing();
-        
+
         ClearBackground(GRAY);
+
+        if(!shop.isShopActive()){
+            player.updatePlayer(&level);
+        }
+        // player.updatePlayer(&level);
+        camera.target = player.getPosition();
 
         BeginMode2D(camera);
         
         level.drawLevel();
         player.drawPlayer();
-        // level.drawShop();
-        camera.target = player.getPlayerPosition();
 
         EndMode2D();
+
         if(shop.isShopActive()){
             shop.drawShop(WINDOWWIDTH, WINDOWHEIGHT);
         }

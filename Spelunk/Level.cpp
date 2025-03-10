@@ -1,8 +1,8 @@
 #include "Level.h"
 
 //Will get the defualt level currently
-Level::Level(){
-    currentLevel = 0;
+Level::Level(int startingLevel){
+    currentLevel = startingLevel;
     loadLevel(getLevelFile(currentLevel));
     loadTextures();
 }
@@ -15,26 +15,22 @@ void Level::drawLevel(){
     for(int i = 0; i < boardHeight; ++i){
         for (int j = 0; j < boardWidth; ++j){
 
-            //Open Space
-            if(board[i][j] == 0){
+            if(board[i][j] == static_cast<int>(LevelValues::SPACE)){
                 blockColor = WHITE;
             }
-            //Wall
-            else if(board[i][j] == 1){
+
+            else if(board[i][j] == static_cast<int>(LevelValues::WALL)){
                 blockColor = BLACK;
             }
-            //Coin/Collectable
-            else if(board[i][j] == 2){
+
+            else if(board[i][j] == static_cast<int>(LevelValues::COLLECTABLE)){
                 blockColor = YELLOW;
             }
-            //Shop to use coins
-            else if(board[i][j] == 3){
-                blockColor = BLUE;
-            }
-            //End of Level
-            else if(board[i][j] == 9){
+
+            else if(board[i][j] == static_cast<int>(LevelValues::SHOP)){
                 blockColor = PINK;
             }
+
             //Should never happen
             else{
                 blockColor = PURPLE;
@@ -119,14 +115,31 @@ void Level::loadLevel(std::string file){
 
     while(std::getline(levelFile, currentLine)){
         for(int j = 0; j < 50; ++j){
-            //With single digits automatically converts to ASCII value,
-            //so have to minus 0 ASCII value to get actual value
-            board[i][j] = currentLine.at(j)  - '0';
+
+            if(currentLine.at(j) == 'P'){
+                //Want the player starting block to be open space
+                //Need to get playerPosition from P in level
+                board[i][j] = '0';
+                playerStart = {(float)j * 50 + 25, (float)i * 50 + 25};
+            }
+
+            else{
+                board[i][j] = currentLine.at(j);
+            }
         }
         ++i;
     }
     levelFile.close();
 
+}
+
+void Level::changeBoardSquare(int row, int col, int newValue){
+    if(row >= boardHeight || col >= boardWidth){
+        std::cout << "Out of bounds, can't change board value" << std::endl;
+    }
+    else{
+        board[row][col] = newValue;
+    }
 }
 
 void Level::printBoard(){
@@ -136,4 +149,8 @@ void Level::printBoard(){
         }
         std::cout << std::endl;
     }
+}
+
+Vector2 Level::getPlayerStartPos(){
+    return playerStart;
 }

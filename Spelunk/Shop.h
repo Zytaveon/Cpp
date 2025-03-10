@@ -1,12 +1,12 @@
 #ifndef SHOP_H
 #define SHOP_H
 
-class Player;
+#include "Character.H"
 
 class Shop{
     public:
 
-        Shop(Player* player);
+        Shop();
         void drawShop(int windowWidth, int windowHeighth);
         bool isShopActive();
         void activateShop();
@@ -14,7 +14,7 @@ class Shop{
 
     private:
         Player* currentPlayer;
-        bool activeShop;
+        bool activeShop = false;
 
 };
 

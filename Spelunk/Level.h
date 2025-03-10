@@ -7,9 +7,17 @@
 #include <string>
 #include "include/raylib.h"
 
+enum class LevelValues{
+    SPACE = 48,
+    WALL = 49,
+    COLLECTABLE = 67,
+    PLAYER = 80,
+    SHOP = 83
+};
+
 class Level{
     public:
-        Level();
+        Level(int startingLevel);
         void drawLevel();
         int getCellValue(int row, int col);
         void grabCollectable(int row, int col);
@@ -17,8 +25,10 @@ class Level{
         void disableShop();
         void loadTextures();
         void unloadtextures();
-
+        void changeBoardSquare(int row, int col, int newValue);
         void printBoard();
+
+        Vector2 getPlayerStartPos();
 
     private:
 
@@ -36,8 +46,11 @@ class Level{
         std::string getLevelFile(int currentLevel);
         void loadLevel(std::string file);
 
+        Vector2 playerStart;
+
         //Tester Functions
         // void printBoard();
+
 
 
 

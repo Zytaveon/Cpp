@@ -9,8 +9,8 @@
 
 Player::Player(Vector2 position){
     //Change values based on player size so player is actually in middle of the screen
-    position.x = position.x - playerWidth / 2;
-    position.y = position.y - playerHeight / 2;
+    position.x = position.x + playerWidth / 2;
+    position.y = position.y + playerHeight / 2;
 
     playerPosition = position;
     playerGold = 0;
