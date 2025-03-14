@@ -23,6 +23,8 @@ class Item{
 class SingleBoots : public Item{
     public:
         SingleBoots() : Item(ItemType::BOOTS, 100){};
+        void jump();
+        void checkjump();
 
     private:
 };
