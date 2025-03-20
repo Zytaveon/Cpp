@@ -2,6 +2,7 @@
 #define SIMULATION_HPP
 
 #include <iostream>
+#include <vector>
 #include "include/raylib.h"
 
 class Simulation{
@@ -15,6 +16,11 @@ class Simulation{
         int WINDOWHEIGHT;
         int GRIDROWS;
         int GRIDCOLS;
+
+        std::vector<std::vector<int>> grid;
+
+        void createGrid();
+        void printGrid();
 
 };
 
