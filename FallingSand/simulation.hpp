@@ -16,11 +16,20 @@ class Simulation{
         int WINDOWHEIGHT;
         int GRIDROWS;
         int GRIDCOLS;
+        float boxWidth;
+        float boxHeight;
 
         std::vector<std::vector<int>> grid;
+        std::vector<std::vector<int>> oldGrid;
 
+        void drawGrid();
+        void addSand(Vector2 mousePosition);
+
+        Vector2 mouseToGridPositon(Vector2 mousePosition);
+        void updateGrid();
         void createGrid();
         void printGrid();
+        
 
 };
 
