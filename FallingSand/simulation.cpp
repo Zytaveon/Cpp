@@ -79,6 +79,8 @@ Vector2 Simulation::mouseToGridPositon(Vector2 mousePosition){
 
 void Simulation::updateGrid(){
     //Reset OldGrid
+
+    /*
     for(int i = 0; i < GRIDROWS; ++i){
         for(int j = 0; j < GRIDCOLS; ++j){
             oldGrid.at(i).at(j) = 0;
@@ -95,7 +97,7 @@ void Simulation::updateGrid(){
     }
 
     for(int j = 0; j < GRIDCOLS; ++j){
-        if(oldGrid.at(GRIDROWS - 1).at(j) == 1){
+        if(grid.at(GRIDROWS - 1).at(j) == 1){
             //Do Nothing
         }
         else{
@@ -104,6 +106,31 @@ void Simulation::updateGrid(){
     }
 
     grid = oldGrid;
+    */
+
+    //Reset Old Grid
+    for(int i = 0; i < GRIDROWS; ++i){
+        for(int j = 0; j < GRIDCOLS; ++j){
+            oldGrid.at(i).at(j) = 0;
+        }
+    }
+
+    for(int i = GRIDROWS - 1; i > 0; --i){
+        for(int j = 0; j < GRIDCOLS; ++j){
+            if(grid.at(i).at(j) == 0){
+                oldGrid.at(i).at(j) = grid.at(i - 1).at(j);
+            }
+
+            if(grid.at(i).at(j) == 1){
+                if(i == GRIDROWS - 1 || grid.at(i  + 1).at(j) == 1){
+                    oldGrid.at(i).at(j) = 1;
+                }
+            }
+        }
+    }
+
+    grid = oldGrid;
+
 }
 
 void Simulation::createGrid(){
