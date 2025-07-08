@@ -1,1 +1,1 @@
-g++ 2048.cpp -o 2048 -O1 -Wall -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+g++ 2048.cpp Game.cpp -o 2048 -O1 -Wall -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
