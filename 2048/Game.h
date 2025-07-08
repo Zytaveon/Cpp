@@ -11,7 +11,6 @@ class Game{
         Game(int WinWidth, int WinHeight, int gridRows, int gridCols);
 
         void drawGame();
-        void printGrid();
 
     private:
 
@@ -24,6 +23,9 @@ class Game{
         int cellWidth;
 
         std::vector<std::vector<int>> Grid;
+
+        void printGrid();
+        void addStartBlocks();
 
 };
 

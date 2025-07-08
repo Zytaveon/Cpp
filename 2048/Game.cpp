@@ -19,6 +19,18 @@ Game::Game(int WinWidth, int WindHeight, int gridRows, int gridCols){
     }
 
     Grid = newGrid;
+
+    printGrid(); //Check if Grid was made correct
+
+    addStartBlocks();
+}
+
+//Currently starting blocks aren't random.
+void Game::addStartBlocks(){
+    Grid.at(0).at(1) = 1;
+    Grid.at(2).at(2) = 1;
+
+    printGrid();
 }
 
 void Game::printGrid(){
@@ -31,12 +43,20 @@ void Game::printGrid(){
 }
 
 void Game::drawGame(){
+
     ClearBackground(GRAY);
 
     for(int i = 0; i < gridRows; ++i){
         for(int j = 0; j < gridCols; ++j){
-            DrawRectangle(cellWidth * j, cellHeight * i, cellWidth - 2, cellHeight - 2, WHITE);
+            if(Grid.at(i).at(j) == 0){
+                DrawRectangle(cellWidth * j, cellHeight * i, cellWidth - 2, cellHeight - 2, WHITE);
+            }
+            if(Grid.at(i).at(j) == 1){
+                DrawRectangle(cellWidth * j, cellHeight * i, cellWidth - 2, cellHeight - 2, RED);
+            }
         }
     }
+
+    
 }
 
