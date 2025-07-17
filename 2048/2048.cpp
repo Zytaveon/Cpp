@@ -23,6 +23,16 @@ int main(){
             game.drawGame();
 
         EndDrawing();
+
+        if(IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)){ game.shiftLeft(); }
+
+        if(IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)){
+             game.shiftRight();
+             game.gameTester(); }
+
+        if(IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)){ game.shiftUp(); }
+
+        if(IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)){ game.shiftDown(); }
     }
 
     CloseWindow();

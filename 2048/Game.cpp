@@ -10,6 +10,8 @@ Game::Game(int WinWidth, int WindHeight, int gridRows, int gridCols){
     cellHeight = WindowHeight / gridRows;
     cellWidth = WindowWidth / gridCols;
 
+    blockColor = RED;
+
     std::vector<std::vector<int>> newGrid (gridRows, std::vector<int>(gridCols));
     
     for(int i = 0; i < this->gridRows; ++i){
@@ -19,6 +21,7 @@ Game::Game(int WinWidth, int WindHeight, int gridRows, int gridCols){
     }
 
     Grid = newGrid;
+    tempGrid = newGrid;
 
     printGrid(); //Check if Grid was made correct
 
@@ -52,11 +55,71 @@ void Game::drawGame(){
                 DrawRectangle(cellWidth * j, cellHeight * i, cellWidth - 2, cellHeight - 2, WHITE);
             }
             if(Grid.at(i).at(j) == 1){
-                DrawRectangle(cellWidth * j, cellHeight * i, cellWidth - 2, cellHeight - 2, RED);
+                DrawRectangle(cellWidth * j, cellHeight * i, cellWidth - 2, cellHeight - 2, blockColor);
             }
         }
     }
 
     
+}
+
+void Game::shiftLeft(){
+
+    blockColor = GREEN;
+
+    shiftBlocks(3);
+}
+
+void Game::shiftRight(){
+
+    blockColor = BLUE;
+
+    shiftBlocks(1);
+}
+
+void Game::shiftUp(){
+
+    blockColor = YELLOW;
+
+    shiftBlocks(2);
+}
+
+void Game::shiftDown(){
+
+    blockColor = PURPLE;
+
+    shiftBlocks(0);
+}
+
+void Game::gameTester(){
+    clockwiseRotate();
+}
+
+void Game::shiftBlocks(int turn){
+    for(int i = 0; i < 4; ++i){
+        if(i == turn){
+            //gravity or Shift blocks
+        }
+        
+        //Rotate grid clockwise 90 degrees
+    }
+}
+
+void Game::clockwiseRotate(){
+    for(int i = 0; i < gridRows; ++i){
+        for(int j = 0; j < gridCols; ++j){
+            tempGrid.at(j).at(gridRows - 1 - i) = Grid.at(i).at(j);
+        }
+    }
+
+    Grid = tempGrid;
+}
+
+void Game::gravityOnBlocks(){
+
+    for(int i = 0; i < gridCols; ++i){
+        int currentRow = gridRows - 1;
+        while(currentRow > 0)
+    }
 }
 
