@@ -17,6 +17,9 @@ class Game{
         int WINDOWWIDTH;
         int WINDOWHEIGHT;
 
+        //TEXTURE FILES
+        std::string TEXTUREFILE_PLAYER = "../resources/Sprites/BirdPlayer.png";
+
 
 };
 
