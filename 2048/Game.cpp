@@ -119,7 +119,9 @@ void Game::gravityOnBlocks(){
 
     for(int i = 0; i < gridCols; ++i){
         int currentRow = gridRows - 1;
-        while(currentRow > 0)
+        while(currentRow > 0){
+            std::cout << "Stuck in a while loop" << std::endl;
+        }
     }
 }
 
