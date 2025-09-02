@@ -1,0 +1,26 @@
+Gameplans:
+    -> User starts with coins
+    -> User will be able to plays games or open card packs. 
+    -> Gambling can earn/lose coins for user. 
+    -> Opening packs will earn cards
+        -> Collectable cards 
+            -> WIll be able to sell singles (less) / collections (more)
+            -> Maybe add a buy/sell market and create economy
+        ->Gamble cards
+            -> Cards with perks, that can add stats to gambling games
+                -> Luck multiplier
+                -> Guaranteed win
+                -> Straight into "bonus"
+
+Game Functions:
+
+    1: Get New Or Returning Player
+        -> Create New or Returning Player
+    2:Give options to play
+        -> Gamble
+            -> Select/Play Certain Game
+        -> But CardPack
+            -> Show what cards were unpacked
+        -> See collection
+            -> View/Sell Cards
+        
