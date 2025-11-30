@@ -1,0 +1,1 @@
+g++ Code.cpp -o Code
